@@ -54,7 +54,10 @@ h1,h2,h3{text-wrap:balance;margin:0}
    radial-gradient(60% 80% at 100% 0%,color-mix(in srgb,var(--gold) 22%,transparent) 0%,transparent 60%),
    radial-gradient(50% 70% at 0% 100%,color-mix(in srgb,var(--maple) 14%,transparent) 0%,transparent 60%),
    var(--bg)}
-.hero .wrap{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;padding-block:34px 26px}
+.hero .wrap{display:grid;grid-template-columns:auto 1fr minmax(260px,380px);gap:34px;align-items:center;padding-block:34px 26px}
+.heropic{border-radius:999px 999px 18px 18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);aspect-ratio:4/5;background:var(--sky)}
+.heropic img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+.heropic figcaption{display:none}
 .logo{width:150px;aspect-ratio:315/530;border-radius:999px 999px 16px 16px;overflow:hidden;background:var(--sky);box-shadow:var(--shadow);border:1px solid var(--line)}
 .logo img{width:100%;height:100%;object-fit:cover;display:block}
 .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(2.4rem,6.5vw,4.8rem);line-height:.98;letter-spacing:-.015em;font-variation-settings:"opsz" 144,"SOFT" 60}
@@ -194,6 +197,7 @@ body.owner-mode .card .own{display:flex}
 
 @media (max-width:760px){
   .hero .wrap{grid-template-columns:1fr;gap:16px;padding-block:24px 18px}
+  .heropic{aspect-ratio:4/5;max-height:70vh;margin:0 auto;width:min(100%,420px)}
   .logo{width:110px}
   .lockup{justify-content:flex-start}
   .how ol{grid-template-columns:1fr}
@@ -273,7 +277,7 @@ body.owner-mode .card .own{display:flex}
     h += '<p class="lede">Union Square is the old Union High School, Grand Rapids\u2019 main high school from 1875 to 1968. Brian and Erica have lived in its gymnasium loft since the building reopened as condos in 2006. <b>Twenty years later, it\u2019s the end of an era:</b> they\u2019re graduating to Lake Michigan, two homes are becoming one, and nearly everything is looking for a new home.</p>';
     h += '<div class="treats">'+LEAF+'No tricks. All treats. Tap a price and it\u2019s yours.</div>';
     h += '<div class="updated">Last updated <b>'+esc(fmtDate(state.updated))+'</b>'+(state.comingSoon?' &middot; Coming soon: '+esc(state.comingSoon):'')+'</div>';
-    h += '</div></div></header>';
+    h += '</div><figure class="heropic"><img src="photos/hero_window.jpg" alt="The big arched gymnasium window of the loft at Union Square"><figcaption>The gym window</figcaption></figure></div></header>';
 
     h += '<section class="how wrap"><ol><li><div><b>Love it? Tap the price.</b><span>Venmo opens with the amount and the item filled in. First to pay, first served. We confirm by text.</span></div></li><li><div><b>Paying cash, or want to offer less?</b><span>Tap <i>I’ll take it</i>, <i>Make an offer</i> or <i>Ask a question</i>. All three write a text to '+esc(state.textName)+' for you.</span></div></li><li><div><b>Pick up by '+esc(state.pickupBy)+'.</b><span>'+esc(state.address)+'. Most days and evenings. Bring a friend for the big pieces.</span></div></li></ol>';
     h += '<div class="owner" id="owner-panel"><h3>Owner tools</h3><form id="add"><input name="name" placeholder="Item name" required><select name="g">'+state.groups.filter(function(g){return g.id!=='bundles';}).map(function(g){return '<option value="'+esc(g.id)+'">'+esc(g.name)+'</option>';}).join('')+'</select><input name="price" type="number" placeholder="Price" required><input name="dims" placeholder="Dimensions"><input name="sup" placeholder="Superlative (optional)"><input name="photo" type="file" accept="image/*"><textarea name="desc" placeholder="One or two lines of description"></textarea><div class="row"><button class="btn primary" type="submit">Add item</button><button class="btn" type="button" id="save">Save and publish changes</button><button class="btn" type="button" id="viewas">View as visitor</button><span id="owner-msg" style="font-size:.85rem;color:var(--muted)"></span></div></form></div>';
