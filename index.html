@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<title>Union Square Class of 2026</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Union Square is the old Union High School. Brian and Erica have lived in its gymnasium loft since 2006. Twenty years later they are graduating to Lake Michigan, and nearly everything is looking for a new home.">
 <meta property="og:type" content="website">
@@ -16,7 +17,6 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>Union Square Class of 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Jost:ital,wght@0,300..700;1,300..700&display=swap">
 <style id="css">
@@ -161,7 +161,7 @@ details.why a{color:var(--ink)}
 .dlg h3{font-family:var(--display);font-weight:500;font-size:1.35rem;padding-right:40px}
 .dlg p{color:var(--muted);font-size:.92rem;margin:6px 0 10px}
 .dlg label{display:block;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
-.dlg input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--bg);color:var(--ink);margin-top:4px}
+.dlg input,.dlg textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--bg);color:var(--ink);margin-top:4px}.dlg textarea{min-height:72px;resize:vertical}
 .dlg .msg{margin-top:12px;background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;font-size:.93rem;white-space:pre-wrap;user-select:all}
 .dlg .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
 .dlg .num{font-weight:600;letter-spacing:.02em}
@@ -252,7 +252,7 @@ body.owner-mode .card .own{display:flex}
     if(it.dims) h += '<div class="dims">'+esc(it.dims)+'</div>';
     if(it.note) h += '<div class="note">'+esc(it.note)+'</div>';
     if(it.status==='available'){
-      h += '<div class="actions"><button class="btn primary" type="button" data-claim="'+esc(it.id)+'">I’ll take it</button><button class="btn" type="button" data-offer="'+esc(it.id)+'">Make an offer</button></div>';
+      h += '<div class="actions"><button class="btn primary" type="button" data-claim="'+esc(it.id)+'">I’ll take it</button><button class="btn" type="button" data-offer="'+esc(it.id)+'">Make an offer</button><button class="btn" type="button" data-ask="'+esc(it.id)+'">Ask a question</button></div>';
     } else if(it.status==='pending'){
       h += '<div class="actions"><span class="btn" aria-disabled="true">Spoken for, pending pickup</span></div>';
     } else {
@@ -275,7 +275,7 @@ body.owner-mode .card .own{display:flex}
     h += '<div class="updated">Last updated <b>'+esc(fmtDate(state.updated))+'</b>'+(state.comingSoon?' &middot; Coming soon: '+esc(state.comingSoon):'')+'</div>';
     h += '</div></div></header>';
 
-    h += '<section class="how wrap"><ol><li><div><b>Love it? Tap the price.</b><span>Venmo opens with the amount and the item filled in. First to pay, first served. We confirm by text.</span></div></li><li><div><b>Paying cash, or want to offer less?</b><span>Tap <i>I’ll take it</i> or <i>Make an offer</i>. Both write a text to '+esc(state.textName)+' for you.</span></div></li><li><div><b>Pick up by '+esc(state.pickupBy)+'.</b><span>'+esc(state.address)+'. Most days and evenings. Bring a friend for the big pieces.</span></div></li></ol>';
+    h += '<section class="how wrap"><ol><li><div><b>Love it? Tap the price.</b><span>Venmo opens with the amount and the item filled in. First to pay, first served. We confirm by text.</span></div></li><li><div><b>Paying cash, or want to offer less?</b><span>Tap <i>I’ll take it</i>, <i>Make an offer</i> or <i>Ask a question</i>. All three write a text to '+esc(state.textName)+' for you.</span></div></li><li><div><b>Pick up by '+esc(state.pickupBy)+'.</b><span>'+esc(state.address)+'. Most days and evenings. Bring a friend for the big pieces.</span></div></li></ol>';
     h += '<div class="owner" id="owner-panel"><h3>Owner tools</h3><form id="add"><input name="name" placeholder="Item name" required><select name="g">'+state.groups.filter(function(g){return g.id!=='bundles';}).map(function(g){return '<option value="'+esc(g.id)+'">'+esc(g.name)+'</option>';}).join('')+'</select><input name="price" type="number" placeholder="Price" required><input name="dims" placeholder="Dimensions"><input name="sup" placeholder="Superlative (optional)"><input name="photo" type="file" accept="image/*"><textarea name="desc" placeholder="One or two lines of description"></textarea><div class="row"><button class="btn primary" type="submit">Add item</button><button class="btn" type="button" id="save">Save and publish changes</button><button class="btn" type="button" id="viewas">View as visitor</button><span id="owner-msg" style="font-size:.85rem;color:var(--muted)"></span></div></form></div>';
     h += '</section>';
 
@@ -334,10 +334,11 @@ body.owner-mode .card .own{display:flex}
 
   function openDialog(it,mode){
     var root=document.getElementById('dlg-root');
-    var title = mode==='claim' ? 'Claim it: '+it.name : 'Make an offer: '+it.name;
-    var intro = mode==='claim' ? 'Paying cash at pickup? Send '+state.textName+' this text and it’s held for you.' : 'Tell '+state.textName+' your number. He answers every offer, usually within a few hours.';
+    var title = mode==='claim' ? 'Claim it: '+it.name : mode==='ask' ? 'Ask about: '+it.name : 'Make an offer: '+it.name;
+    var intro = mode==='claim' ? 'Paying cash at pickup? Send '+state.textName+' this text and it’s held for you.' : mode==='ask' ? 'Measurements, condition, when you can see it: type the question and it goes to '+state.textName+' as a text.' : 'Tell '+state.textName+' your number. He answers every offer, usually within a few hours.';
     root.innerHTML = '<div class="dlg" role="dialog" aria-label="'+esc(title)+'"><div class="box"><button class="x" type="button" aria-label="Close">×</button><h3>'+esc(title)+'</h3><p>'+esc(intro)+'</p>'+
       (mode==='offer'?'<label for="offer-amt">Your offer</label><input id="offer-amt" type="number" inputmode="numeric" placeholder="e.g. '+Math.round(it.price*0.8)+'">':'')+
+      (mode==='ask'?'<label for="offer-q">Your question</label><textarea id="offer-q" placeholder="e.g. Does the glass come out? Could I see it Tuesday?"></textarea>':'')+
       '<label for="offer-name">Your name</label><input id="offer-name" type="text" placeholder="So we know who’s coming">'+
       '<div class="msg" id="offer-msg"></div>'+
       '<div class="acts"><a class="btn primary" id="offer-sms" href="#" target="_blank" rel="noopener">Open in Messages</a><button class="btn" type="button" id="offer-copy">Copy the text</button><span class="num">'+esc(state.textName)+': '+esc(state.textPhone)+'</span></div>'+
@@ -346,17 +347,20 @@ body.owner-mode .card .own{display:flex}
       var name=(document.getElementById('offer-name').value||'').trim();
       var amt=mode==='offer'?Number((document.getElementById('offer-amt')||{}).value):it.price;
       var nm = it.name.replace(/^the\s+/i,'');
+      var q=mode==='ask'?((document.getElementById('offer-q')||{}).value||'').trim():'';
       var txt = mode==='claim'
         ? 'Hi '+state.textName+', I’ll take the '+nm+' from the Union Square sale at '+money(it.price)+', cash at pickup.'+(name?' – '+name:'')
+        : mode==='ask'
+        ? 'Hi '+state.textName+', quick question about the '+nm+' from the Union Square sale: '+(q||'____')+(name?' – '+name:'')
         : 'Hi '+state.textName+', I’d like to offer '+(amt?money(amt):'$____')+' for the '+nm+' from the Union Square sale.'+(name?' – '+name:'');
       document.getElementById('offer-msg').textContent=txt;
       document.getElementById('offer-sms').href='sms:'+state.textE164+'?&body='+encodeURIComponent(txt);
       return txt;
     }
     build();
-    root.querySelectorAll('input').forEach(function(i){i.addEventListener('input',build);});
+    root.querySelectorAll('input,textarea').forEach(function(i){i.addEventListener('input',build);});
     document.getElementById('offer-copy').addEventListener('click',function(){copyText(build());});
-    var first=root.querySelector('input'); if(first) first.focus();
+    var first=root.querySelector('textarea,input'); if(first) first.focus();
   }
 
   app.addEventListener('click',function(e){
@@ -371,6 +375,7 @@ body.owner-mode .card .own{display:flex}
     if(e.target.closest('.lb')){ if(!e.target.closest('.lb img')) document.getElementById('lb-root').innerHTML=''; return;}
     var cl = e.target.closest('[data-claim]'); if(cl){openDialog(find(cl.getAttribute('data-claim')),'claim');return;}
     var of = e.target.closest('[data-offer]'); if(of){openDialog(find(of.getAttribute('data-offer')),'offer');return;}
+    var ak = e.target.closest('[data-ask]'); if(ak){openDialog(find(ak.getAttribute('data-ask')),'ask');return;}
     if(e.target.closest('.dlg .x') || (e.target.classList && e.target.classList.contains('dlg'))){document.getElementById('dlg-root').innerHTML='';return;}
     var cp = e.target.closest('[data-copy]'); if(cp){copyText(cp.getAttribute('data-copy'));return;}
     var rm = e.target.closest('[data-own="remove"]');
