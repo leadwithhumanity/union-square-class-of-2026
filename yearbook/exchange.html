@@ -61,10 +61,10 @@ const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 function hl(t,term){const e=esc(t);if(!term)return e;const re=new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');return e.replace(re,'<mark>$1</mark>')}
 function render(reset){if(reset){wall.innerHTML='';shown=0}const term=q.value.trim();const slice=list.slice(shown,shown+PAGE);for(const t of slice){const d=document.createElement('article');d.className='rv '+(t.length<90?'short':t.length>420?'long':'');d.innerHTML='<p>'+hl(t,term)+'</p>';wall.appendChild(d)}shown+=slice.length;n.textContent=list.length+' of '+R.length;more.hidden=shown>=list.length}
 function filter(){const term=q.value.trim().toLowerCase();list=term?R.filter(t=>t.toLowerCase().includes(term)):R.slice();render(true)}
-q.addEventListener('input',filter);more.addEventListener('click',()=>render(false));
+q.addEventListener('input',filter);more.addEventListener('click',()=>render(false));const qp=new URLSearchParams(location.search).get('q');if(qp){q.value=qp;}
 document.getElementById('shuffle').addEventListener('click',()=>{for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}render(true)});
 for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}
-render(true);
+if(q.value)filter();else render(true);
 })();
 </script>
 
