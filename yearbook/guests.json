@@ -437,8 +437,8 @@
 "file": "guests/1206311842716506.jpg",
 "w": 960,
 "h": 960,
-"caption": "",
-"date": ""
+"caption": "We hosted some really extraordinary families this past month! What an honor it is to share our space and city with guests from around the globe.",
+"date": "2015-12-27"
 },
 {
 "id": "1217743428240014",
@@ -541,8 +541,8 @@
 "file": "guests/1285682294779460.jpg",
 "w": 638,
 "h": 916,
-"caption": "",
-"date": "",
+"caption": "We are honored to be superhosts, for the 6th quarter in a row!",
+"date": "2016-04-09",
 "tags": [
 "Homesharing history"
 ]
@@ -696,8 +696,8 @@
 "file": "guests/1354694681211554.jpg",
 "w": 664,
 "h": 960,
-"caption": "",
-"date": "",
+"caption": "We are honored to receive this recognition!!",
+"date": "2016-07-14",
 "tags": [
 "Homesharing history"
 ]
@@ -1946,5 +1946,76 @@
 "video": true,
 "caption": "",
 "date": ""
+},
+{
+"id": "1033984246664532",
+"file": "guests/1033984246664532.jpg",
+"w": 960,
+"h": 720,
+"caption": "To welcome our Detroit guests in style, we had a pop up party! They are celebrating their 24th wedding anniversary so we had champagne, tequila tasting, Godiva chocolates, smoked fish and dips from the Fish Lad, cheese from Apertivo and wonderful conversation about life, love and marriage #theloftatunionsquare",
+"date": "2015-10-24",
+"tags": [
+"Anniversaries"
+]
+},
+{
+"id": "1037797199616570",
+"file": "guests/1037797199616570.jpg",
+"w": 720,
+"h": 960,
+"caption": "We loved hosting Pete and Lauren this weekend. They met a few months ago on match.com. This was their first weekend getaway. Here they are in their Halloween costumes. Can you guess who they are?",
+"date": "2015-11-01",
+"tags": []
+},
+{
+"id": "1040913132638310",
+"file": "guests/1040913132638310.jpg",
+"w": 720,
+"h": 960,
+"caption": "Had a blast hosting Tricia from NYC this weekend. She just ran the New York Marathon last weekend! #inspiration",
+"date": "2015-11-08",
+"tags": [
+"Marathon"
+]
+},
+{
+"id": "1040914025971554",
+"file": "guests/1040914025971554.jpg",
+"w": 720,
+"h": 960,
+"caption": "What an honor to host Kathryn Switzer, the first woman to register for and finish the Boston Marathon! #marathonwoman #trailblazer #fearless",
+"date": "2015-11-08",
+"tags": [
+"Famous guests",
+"Marathon"
+],
+"featured": true
+},
+{
+"id": "1042052742524349",
+"file": "guests/1042052742524349.jpg",
+"w": 720,
+"h": 960,
+"caption": "Loved hosting this couple from Traverse City. He is an ER Doc and travels to hospitals around the country.",
+"date": "2015-11-11",
+"tags": []
+},
+{
+"id": "1042052765857680",
+"file": "guests/1042052765857680.jpg",
+"w": 960,
+"h": 720,
+"caption": "We enjoyed time out of the town at Brewery Vivant with our guests. They also had dinner at the Mitten and highly recommend the pizza flight!",
+"date": "2015-11-11",
+"tags": []
+},
+{
+"id": "1064242536972036",
+"file": "guests/1064242536972036.jpg",
+"w": 720,
+"h": 960,
+"caption": "Merry Christmas and happiest of holiday seasons, friends! Thank you for staying with us in 2015! Looking forward to hosting you in 2016! Much love, Brian and Erica",
+"date": "2015-12-25",
+"tags": []
 }
 ]
