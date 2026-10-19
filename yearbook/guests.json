@@ -21,7 +21,10 @@
 "w": 720,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Notes"
+]
 },
 {
 "id": "1014067928607566",
@@ -157,7 +160,10 @@
 "w": 720,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Guestbooks"
+]
 },
 {
 "id": "1111735552174136",
@@ -284,8 +290,11 @@
 "file": "guests/1142939322387092.jpg",
 "w": 540,
 "h": 960,
-"caption": "",
-"date": ""
+"caption": "Airbnb's one-year note, September 2015: 117 guests from 50 cities, 204 nights.",
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "1143723518975339",
@@ -533,7 +542,10 @@
 "w": 638,
 "h": 916,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "1289588024388887",
@@ -685,7 +697,10 @@
 "w": 664,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "1354802794534076",
@@ -700,8 +715,13 @@
 "file": "guests/1354802801200742.jpg",
 "w": 1200,
 "h": 330,
-"caption": "",
-"date": ""
+"caption": "From the guest journal: \"Feeling completely safe in this house during the perilous time we are living.\"",
+"date": "",
+"tags": [
+"Notes",
+"Feeling safe"
+],
+"featured": true
 },
 {
 "id": "1415085408505814",
@@ -876,8 +896,13 @@
 "file": "guests/1637487896265563.jpg",
 "w": 710,
 "h": 959,
-"caption": "",
-"date": ""
+"caption": "\"My girlfriend and I are looking to both stay there... I hope you're okay with it.\" \"We welcome you to our home and community. You are safe with us and we would be honored to host you.\"",
+"date": "",
+"tags": [
+"Notes",
+"Feeling safe"
+],
+"featured": true
 },
 {
 "id": "1637487986265554",
@@ -885,7 +910,12 @@
 "w": 721,
 "h": 959,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Notes",
+"Feeling safe"
+],
+"featured": true
 },
 {
 "id": "1637493582931661",
@@ -893,7 +923,11 @@
 "w": 960,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Notes",
+"Feeling safe"
+]
 },
 {
 "id": "1637493586264994",
@@ -1172,8 +1206,12 @@
 "file": "guests/1766969643317387.jpg",
 "w": 960,
 "h": 720,
-"caption": "",
-"date": ""
+"caption": "Erica with Rebecca and her father, Ivan.",
+"date": "",
+"tags": [
+"Family"
+],
+"featured": true
 },
 {
 "id": "1772327019448316",
@@ -1252,8 +1290,12 @@
 "file": "guests/1817473711600313.jpg",
 "w": 960,
 "h": 720,
-"caption": "",
-"date": ""
+"caption": "The Union High Class of 1967, the last class to graduate from the building, back on the front steps for their 50th reunion, August 2017.",
+"date": "",
+"tags": [
+"Union High"
+],
+"featured": true
 },
 {
 "id": "1820405321307152",
@@ -1677,7 +1719,10 @@
 "w": 558,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "4227317017282625",
@@ -1685,7 +1730,10 @@
 "w": 554,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "4227317027282624",
@@ -1693,15 +1741,22 @@
 "w": 558,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "4575697425777914",
 "file": "guests/4575697425777914.jpg",
 "w": 960,
 "h": 720,
-"caption": "",
-"date": ""
+"caption": "The guest journals, all four of them.",
+"date": "",
+"tags": [
+"Guestbooks"
+],
+"featured": true
 },
 {
 "id": "4575737385773918",
@@ -1709,7 +1764,10 @@
 "w": 720,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Guestbooks"
+]
 },
 {
 "id": "4575737419107248",
@@ -1717,7 +1775,10 @@
 "w": 720,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Guestbooks"
+]
 },
 {
 "id": "4841945202486467",
@@ -1725,7 +1786,11 @@
 "w": 490,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Notes",
+"Feeling safe"
+]
 },
 {
 "id": "4841945222486465",
@@ -1733,7 +1798,11 @@
 "w": 960,
 "h": 644,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Notes",
+"Feeling safe"
+]
 },
 {
 "id": "932028696811490",
@@ -1764,8 +1833,12 @@
 "file": "guests/962402627107430.jpg",
 "w": 960,
 "h": 658,
-"caption": "",
-"date": ""
+"caption": "The City of Grand Rapids homesharing license, number HOB-14-0034, permit #4, issued November 2014: one of the first in the city after Brian and Erica helped get short-term rentals legalized.",
+"date": "",
+"tags": [
+"Homesharing history"
+],
+"featured": true
 },
 {
 "id": "962427513771608",
@@ -1773,7 +1846,10 @@
 "w": 720,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Guestbooks"
+]
 },
 {
 "id": "962427533771606",
@@ -1781,7 +1857,10 @@
 "w": 960,
 "h": 719,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Guestbooks"
+]
 },
 {
 "id": "962427567104936",
@@ -1797,7 +1876,10 @@
 "w": 720,
 "h": 960,
 "caption": "",
-"date": ""
+"date": "",
+"tags": [
+"Homesharing history"
+]
 },
 {
 "id": "980187988662227",
