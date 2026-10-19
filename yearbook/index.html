@@ -16,49 +16,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="yearbook.css">
 <style>
-.cover{position:relative;min-height:calc(100svh - 50px);display:grid;align-items:end;color:var(--bg);isolation:isolate}
-.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.cover:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(44,34,29,.05) 20%,rgba(44,34,29,.72) 70%,rgba(44,34,29,.92))}
-.cover .wrap{padding:120px 0 48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
-.cover .title{font-family:var(--display);font-weight:800;line-height:.9;letter-spacing:-.02em;font-size:clamp(3.2rem,11vw,9rem)}
-.cover .title small{display:block;font-size:.3em;font-weight:600;letter-spacing:.02em;line-height:1.2;margin-bottom:.4em;color:var(--gold)}
+.cover{position:relative;min-height:calc(100svh - 50px);display:grid;place-items:center;color:var(--bg);isolation:isolate;overflow:hidden;text-align:center}
+.cover>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:saturate(.9)}
+.cover:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 40%,rgba(44,34,29,.25),rgba(44,34,29,.82) 75%)}
+.cover .inner{padding:56px 20px 64px;display:flex;flex-direction:column;align-items:center}
+.portrait{margin:0 0 30px;background:#fff;padding:14px 14px 12px;width:min(380px,78vw);transform:rotate(-2deg);box-shadow:0 24px 50px -14px rgba(0,0,0,.6)}
+.portrait img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.portrait figcaption{font-family:var(--hand);font-size:1.7rem;color:var(--ink);line-height:1.1;margin-top:8px}
+.cover .kicker{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:1.05rem;color:var(--bg);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.cover .title,.cover .motto{text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.cover .title{font-family:var(--display);font-weight:800;line-height:.9;letter-spacing:-.02em;font-size:clamp(3.2rem,10vw,7.5rem);margin-top:10px}
 .cover .title .yr{color:var(--gold)}
-.cover .bird{width:84px;color:var(--bg);margin-bottom:18px}
-.cover .motto{font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.7rem);line-height:1.2;margin:22px 0 0;max-width:30ch;color:var(--bg)}
-.cover .tag{max-width:46ch;font-size:clamp(1rem,1.5vw,1.15rem);margin-top:12px;color:rgba(250,244,234,.9)}
-.toc{background:var(--bg);color:var(--ink);padding:28px 30px 30px;border-radius:14px;min-width:300px;font-family:var(--display);box-shadow:var(--shadow)}
-.toc .loftlogo{position:static;width:110px;height:auto;margin:0 0 18px;z-index:auto}
-.toc h2{font-size:1rem;font-weight:700;color:var(--maple);margin-bottom:14px}
-.toc ol{list-style:none;margin:0;padding:0}
-.toc li{display:flex;align-items:baseline;gap:10px;border-top:1px solid var(--line);padding:9px 0}
-.toc li:first-child{border-top:0}
-.toc a{text-decoration:none;font-weight:700;font-size:1.1rem}
-.toc a:hover{color:var(--maple)}
-.toc .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-6px)}
-.toc .pg{color:var(--muted);font-weight:600}
+.cover .motto{font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.25;margin:18px 0 0;max-width:32ch}
+.cover .open{margin-top:30px;background:var(--bg);color:var(--ink)}
+.cover .open:hover{background:var(--gold)}
 .band{background:var(--maple);color:var(--bg);padding:26px 0;font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,2vw,1.35rem)}
 .band .wrap{display:flex;flex-wrap:wrap;gap:10px 40px;justify-content:space-between}
-@media (max-width:820px){.cover .wrap{grid-template-columns:1fr;padding-top:80px}.toc{min-width:0}}
 </style>
 
 </head>
 <body class="pg-index">
-<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html" aria-current=page>Cover</a><a href="celebrate.html">Celebrate With Us</a><a href="history.html">Class History</a><a href="tour.html">Campus Tour</a><a href="classphotos.html">Class Photos</a><a href="exchange.html">Exchange Students</a><a href="news.html">In the News</a><a href="honor.html">Honor Roll</a><a href="give.html">Give</a><a href="after.html">After Graduation</a><a href="sign.html">Autographs</a><a class="sale" href="../">Sale</a></nav></div></header>
+<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html" aria-current=page>Cover</a><a href="contents.html">Contents</a><a href="place.html">The Place</a><a href="celebrate.html">Celebrate With Us</a><a href="history.html">Class History</a><a href="tour.html">Campus Tour</a><a href="classphotos.html">Class Photos</a><a href="exchange.html">Exchange Students</a><a href="news.html">In the News</a><a href="honor.html">Honor Roll</a><a href="give.html">Give</a><a href="after.html">After Graduation</a><a href="sign.html">Autographs</a><a class="sale" href="../">Sale</a></nav></div></header>
 
 <section class="cover">
-  <img src="img/loft_17.jpg" alt="The front steps and arched entrance of Union Square, the old Union High School, in brick and stone." fetchpriority="high">
-  <div class="wrap">
-    <div>
-      <svg class="bird" viewBox="0 0 64 40" aria-hidden="true"><path d="M3 33 L16 27 C14 18 20 8 34 3 C31 9 29 15 31 21 L41 19 C45 18 48 18 50 20 L58 21 L50 23 C48 26 45 27 41 27 C37 32 30 35 20 33 Z" fill="currentColor"/><circle cx="48" cy="20.5" r="1" fill="var(--bg)"/></svg>
-      <h1 class="title"><small>The Loft at Union Square</small>Class of <span class="yr">2026</span></h1>
-      <p class="motto">Celebrating 20 Years of Community, Coupling, and Courage</p>
-      <p class="tag">Brian and Erica's yearbook from the gymnasium of Grand Rapids' first high school: the history, the guests, the clippings, the causes, and a page for you to sign.</p>
-    </div>
-    <nav class="toc" aria-label="Contents"><img class="loftlogo" src="img/loft-logo.svg" alt="The Loft at Union Square, by Brian and Erica Van Ee" width="110"><h2>Contents</h2><ol><li><a href="celebrate.html">Celebrate With Us</a><span class="dots"></span><span class="pg">Oct 23</span></li><li><a href="history.html">Class History</a><span class="dots"></span><span class="pg">2006</span></li><li><a href="tour.html">Campus Tour</a><span class="dots"></span><span class="pg">224</span></li><li><a href="classphotos.html">Class Photos</a><span class="dots"></span><span class="pg">1,000+</span></li><li><a href="exchange.html">Exchange Students</a><span class="dots"></span><span class="pg">681</span></li><li><a href="news.html">In the News</a><span class="dots"></span><span class="pg">2010</span></li><li><a href="honor.html">Honor Roll</a><span class="dots"></span><span class="pg">25%</span></li><li><a href="give.html">Support These Organizations</a><span class="dots"></span><span class="pg">20</span></li><li><a href="after.html">Plans After Graduation</a><span class="dots"></span><span class="pg">2027</span></li><li><a href="sign.html">Autographs</a><span class="dots"></span><span class="pg">You</span></li></ol></nav>
+  <img class="bg" src="img/z224_arch.jpg" alt="" fetchpriority="high">
+  <div class="inner">
+    <figure class="portrait"><img src="img/brian-erica-outside-union-square.jpg" alt="Brian and Erica smiling outside Union Square, the old high school, with drinks in hand."><figcaption>Brian and Erica, Class of 2026</figcaption></figure>
+    <div class="kicker">The Loft at Union Square</div>
+    <h1 class="title">Class of <span class="yr">2026</span></h1>
+    <p class="motto">Celebrating 20 Years of Community, Coupling, and Courage</p>
+    <a class="btn open" href="contents.html">Open the yearbook &rarr;</a>
   </div>
 </section>
 <div class="band"><div class="wrap"><span>2006 to 2026</span><span>1,000+ guests from around the world</span><span>681 reviews</span><span>One gray bird</span></div></div>
 
-<footer class="colophon"><div class="wrap"><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="../">The estate sale</a><a class="next" href="celebrate.html">Next: Celebrate With Us &rarr;</a></div></footer>
+<footer class="colophon"><div class="wrap"><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="../">The estate sale</a><a class="next" href="contents.html">Next: Table of Contents &rarr;</a></div></footer>
 </body>
 </html>
