@@ -62,6 +62,20 @@
  .ev .pic,.ev:nth-child(even) .pic{grid-column:2;grid-row:auto;justify-self:start;padding-top:0}
  .portraits .wrap{grid-template-columns:1fr}
 }
+
+.strip{padding:50px 0 10px}
+.strip h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800}
+.strip .lede{color:var(--muted);max-width:60ch;margin:8px 0 20px}
+.reel{display:flex;gap:18px;overflow-x:auto;padding:10px 4px 26px;scroll-snap-type:x mandatory}
+.reel figure{flex:0 0 auto;margin:0;background:#fff;padding:10px 10px 8px;box-shadow:var(--shadow);scroll-snap-align:start;transform:rotate(var(--r,0deg))}
+.reel img{height:300px;width:auto;display:block}
+.reel figcaption{font-family:var(--hand);font-size:1.4rem;text-align:center;margin-top:4px;color:var(--ink)}
+.pg-honor .strip .lede{color:rgba(250,244,234,.88)}
+.pg-honor .strip .folio{color:var(--gold)}
+.cleanwall{columns:4 220px;column-gap:12px}
+.cleanwall figure{break-inside:avoid;margin:0 0 12px;position:relative}
+.cleanwall img{width:100%;height:auto;display:block;border-radius:4px}
+.cleanwall figcaption{position:absolute;top:8px;left:8px;background:var(--gold);color:var(--ink);font-family:var(--display);font-weight:800;font-size:.9rem;border-radius:999px;padding:2px 10px}
 </style>
 
 </head>
@@ -87,7 +101,7 @@
     <dt>Class motto</dt><dd>The school is a public trust that should be shared.</dd>
   </dl></div>
 </div></section>
-
+<section class="wrap strip"><div class="folio">Couplehood</div><h2>Brian and Erica, through the years</h2><p class="lede">Scroll sideways. The early years, 2007 to 2015, are still being dug out of old albums and will be added here.</p><div class="reel"><figure style="--r:-2deg"><img src="place/c00.jpg" alt="Brian and Erica, March 2016" loading="lazy"><figcaption>March 2016</figcaption></figure><figure style="--r:1.5deg"><img src="place/c02.jpg" alt="Brian and Erica, Summer 2016" loading="lazy"><figcaption>Summer 2016</figcaption></figure><figure style="--r:-1deg"><img src="place/c12.jpg" alt="Brian and Erica, May 2018" loading="lazy"><figcaption>May 2018</figcaption></figure><figure style="--r:2deg"><img src="place/c14.jpg" alt="Brian and Erica, October 2019" loading="lazy"><figcaption>October 2019</figcaption></figure><figure style="--r:-1.5deg"><img src="place/c20.jpg" alt="Brian and Erica, June 2020" loading="lazy"><figcaption>June 2020</figcaption></figure><figure style="--r:1deg"><img src="place/c27.jpg" alt="Brian and Erica, September 2021" loading="lazy"><figcaption>September 2021</figcaption></figure><figure style="--r:-2deg"><img src="place/c38.jpg" alt="Brian and Erica, September 2023" loading="lazy"><figcaption>September 2023</figcaption></figure><figure style="--r:1.5deg"><img src="place/c44.jpg" alt="Brian and Erica, July 2024" loading="lazy"><figcaption>July 2024</figcaption></figure><figure style="--r:-1deg"><img src="place/c55.jpg" alt="Brian and Erica, October 2025" loading="lazy"><figcaption>October 2025</figcaption></figure><figure style="--r:2deg"><img src="place/c57.jpg" alt="Brian and Erica, October 2026" loading="lazy"><figcaption>October 2026</figcaption></figure><figure style="--r:-1.5deg"><img src="place/c61.jpg" alt="Brian and Erica, October 2026, on the balcony" loading="lazy"><figcaption>October 2026, on the balcony</figcaption></figure></div></section>
 <footer class="colophon"><div class="wrap"><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="../">The estate sale</a><a class="next" href="tour.html">Next: Campus Tour &rarr;</a></div></footer>
 </body>
 </html>
