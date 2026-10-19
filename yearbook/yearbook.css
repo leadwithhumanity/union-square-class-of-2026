@@ -44,6 +44,7 @@ p{margin:0 0 1em}
 .colophon{margin-top:80px;padding:34px 0 60px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
 .colophon .wrap{display:flex;flex-wrap:wrap;gap:14px 34px;align-items:baseline}
 .colophon a{color:var(--ink)}
+.colophon .colo-logo{width:64px;height:auto;align-self:center}
 .colophon .next{margin-left:auto;font-family:var(--display);font-weight:700;color:var(--ink);text-decoration:none;font-size:1.05rem}
 .colophon .next:hover{color:var(--maple)}
 
