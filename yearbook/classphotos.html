@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Class Photos, Union Square Class of 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Class photos: every guest photo from the Loft at Union Square hospitality album. Find yourself, then sign the yearbook.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://union-square-class-of-2026.netlify.app/yearbook/classphotos.html">
+<meta property="og:title" content="Class Photos, Union Square Class of 2026">
+<meta property="og:description" content="Class photos: every guest photo from the Loft at Union Square hospitality album. Find yourself, then sign the yearbook.">
+<meta property="og:image" content="https://union-square-class-of-2026.netlify.app/yearbook/img/loft_17.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/photos/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yearbook.css">
+<style>
+.pg-classphotos .pagehead{background:var(--ink);color:var(--bg);padding-bottom:36px}
+.pg-classphotos .pagehead .sub{color:rgba(250,244,234,.8)}
+.pg-classphotos .pagehead .bird{width:64px;color:var(--gold);margin-bottom:10px}
+.findbar{position:sticky;top:50px;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 0}
+.findbar .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.findbar input{flex:1;min-width:220px;font:inherit;font-size:1.05rem;padding:11px 16px;border:2px solid var(--ink);border-radius:999px;background:var(--paper)}
+.findbar .n{font-family:var(--display);font-weight:700;color:var(--muted)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:var(--display);font-weight:700;font-size:.9rem;border:2px solid var(--ink);background:transparent;border-radius:999px;padding:6px 12px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.yearwall{padding-top:18px}
+.yr-h{font-family:var(--display);font-weight:800;font-size:clamp(2rem,5vw,3.4rem);color:var(--maple);margin:34px 0 10px;display:flex;align-items:baseline;gap:14px}
+.yr-h small{font-size:1rem;color:var(--muted);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));grid-auto-rows:180px;grid-auto-flow:dense;gap:8px}
+.g{position:relative;overflow:hidden;background:var(--paper);border-radius:6px;cursor:pointer;border:0;padding:0}
+.g img{width:100%;height:100%;object-fit:cover;display:block}
+.g.tall{grid-row:span 2}.g.wide{grid-column:span 2}.g.big{grid-column:span 2;grid-row:span 2}
+.g .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 8px;background:linear-gradient(transparent,rgba(44,34,29,.85));color:var(--bg);font-size:.85rem;line-height:1.25;opacity:0;transition:opacity .15s}
+.g:hover .cap,.g:focus-visible .cap{opacity:1}
+.g .play{position:absolute;inset:0;display:grid;place-items:center;color:var(--bg);font-family:var(--display);font-weight:800;font-size:2.6rem;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.g .num{position:absolute;top:6px;left:8px;font-family:var(--display);font-weight:700;font-size:.8rem;color:var(--bg);text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.g.feat{outline:4px solid var(--gold);outline-offset:-4px}
+dialog.lb{border:0;padding:0;background:var(--ink);color:var(--bg);width:min(1100px,96vw);max-height:94vh;border-radius:14px;overflow:hidden}
+dialog.lb::backdrop{background:rgba(28,21,18,.85)}
+.lb .inner{display:grid;grid-template-columns:1fr 320px;max-height:94vh}
+.lb .media{background:#000;display:grid;place-items:center;min-height:40vh}
+.lb .media img,.lb .media video{max-width:100%;max-height:94vh;object-fit:contain}
+.lb .side{padding:26px 24px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+.lb .side .no{font-family:var(--display);font-weight:800;color:var(--gold);font-size:1.1rem}
+.lb .side p{font-size:1.02rem;margin:0}
+.lb .side .muted{color:rgba(250,244,234,.7);font-size:.95rem}
+.lb .side a.btn{margin-top:auto;background:var(--gold);color:var(--ink);justify-content:center}
+.lb .close{position:absolute;top:10px;right:12px;background:var(--bg);color:var(--ink);border:0;border-radius:999px;width:38px;height:38px;font-size:1.3rem;cursor:pointer;font-weight:700}
+.lb .navbtn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(250,244,234,.9);color:var(--ink);border:0;border-radius:999px;width:42px;height:42px;font-size:1.4rem;cursor:pointer}
+.lb .prev{left:10px}.lb .next{right:332px}
+@media (max-width:820px){.lb .inner{grid-template-columns:1fr;max-height:none}.lb .media{min-height:0}.lb .next{right:10px}.grid{grid-auto-rows:130px;grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
+</style>
+
+</head>
+<body class="pg-classphotos">
+<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html">Cover</a><a href="history.html">Class History</a><a href="classphotos.html" aria-current=page>Class Photos</a><a href="exchange.html">Exchange Students</a><a href="news.html">In the News</a><a href="honor.html">Honor Roll</a><a href="give.html">Give</a><a href="after.html">After Graduation</a><a href="sign.html">Autographs</a><a class="sale" href="../">Sale</a></nav></div></header>
+
+<section class="pagehead"><div class="wrap"><svg class="bird" viewBox="0 0 64 40" aria-hidden="true"><path d="M3 33 L16 27 C14 18 20 8 34 3 C31 9 29 15 31 21 L41 19 C45 18 48 18 50 20 L58 21 L50 23 C48 26 45 27 41 27 C37 32 30 35 20 33 Z" fill="currentColor"/><circle cx="48" cy="20.5" r="1" fill="var(--bg)"/></svg><div class="folio" style="color:var(--gold)">Class Photos</div><h1>Find yourself</h1><p class="sub">228 photos and 6 short videos from the Loft's hospitality album, in the order they were taken: guests at the door, on the balcony, by the rooftop pool, with the notes you left. If you stayed here, you're probably in here. Find your picture, then sign the yearbook.</p></div></section>
+<div class="findbar"><div class="wrap"><input id="gq" type="search" placeholder="Search names, hometowns, reasons (once captions are in)" aria-label="Search class photos"><div class="chips" id="chips"></div><span class="n" id="gn"></span></div></div>
+<section class="wrap yearwall" id="wall"></section>
+<dialog class="lb" id="lb"><div class="inner"><div class="media" id="lbm"></div><div class="side"><div class="no" id="lbno"></div><p id="lbcap"></p><p class="muted" id="lbdate"></p><a class="btn" id="lbsign" href="sign.html">That's me, sign the yearbook</a></div></div><button class="close" id="lbx" aria-label="Close">&times;</button><button class="navbtn prev" id="lbp" aria-label="Previous">&lsaquo;</button><button class="navbtn next" id="lbn" aria-label="Next">&rsaquo;</button></dialog>
+<script>
+(async()=>{
+const G=await (await fetch('guests.json')).json();
+const wall=document.getElementById('wall'),q=document.getElementById('gq'),n=document.getElementById('gn'),chips=document.getElementById('chips');
+const tags=[...new Set(G.flatMap(g=>g.tags||[]))];
+let active=null;
+for(const t of tags){const b=document.createElement('button');b.className='chip';b.type='button';b.textContent=t;b.setAttribute('aria-pressed','false');b.onclick=()=>{active=active===t?null:t;[...chips.children].forEach(c=>c.setAttribute('aria-pressed',String(c.textContent===active)));render()};chips.appendChild(b)}
+const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+let list=[];
+function render(){const term=q.value.trim().toLowerCase();list=G.filter(g=>(!term||((g.caption||'')+' '+(g.tags||[]).join(' ')).toLowerCase().includes(term))&&(!active||(g.tags||[]).includes(active)));
+wall.innerHTML='';let cur=null,grid=null;
+list.forEach((g,i)=>{const y=g.date?g.date.slice(0,4):(g.year||'');if(y!==cur){cur=y;const h=document.createElement('h2');h.className='yr-h';h.innerHTML=(y||'The album')+'<small></small>';wall.appendChild(h);grid=document.createElement('div');grid.className='grid';wall.appendChild(grid)}
+const b=document.createElement('button');b.className='g'+(g.featured?' feat':'');const r=(g.w&&g.h)?g.w/g.h:1;if(g.featured||g.video)b.classList.add('big');else if(r<0.8)b.classList.add('tall');else if(r>1.6)b.classList.add('wide');
+b.innerHTML='<img loading="lazy" src="'+(g.video?g.file.replace('.mp4','_poster.jpg'):g.file)+'" alt="'+esc(g.caption||'Guest photo')+'">'+(g.video?'<span class="play">&#9654;</span>':'')+'<span class="num">#'+(G.indexOf(g)+1)+'</span>'+(g.caption?'<span class="cap">'+esc(g.caption)+'</span>':'');
+b.onclick=()=>open(G.indexOf(g));grid.appendChild(b)});
+n.textContent=list.length+' of '+G.length}
+const lb=document.getElementById('lb'),lbm=document.getElementById('lbm');let idx=0;
+function open(i){idx=i;const g=G[i];lbm.innerHTML=g.video?'<video controls autoplay playsinline src="'+g.file+'"></video>':'<img src="'+g.file+'" alt="">';document.getElementById('lbno').textContent='#'+(i+1)+(g.date?'  ·  '+g.date:'');document.getElementById('lbcap').textContent=g.caption||'Caption coming: Brian and Erica are adding the story behind each photo.';document.getElementById('lbdate').textContent=(g.tags||[]).join(' · ');document.getElementById('lbsign').href='sign.html?photo='+(i+1);if(!lb.open)lb.showModal()}
+document.getElementById('lbx').onclick=()=>lb.close();document.getElementById('lbp').onclick=()=>open((idx-1+G.length)%G.length);document.getElementById('lbn').onclick=()=>open((idx+1)%G.length);
+lb.addEventListener('click',e=>{if(e.target===lb)lb.close()});lb.addEventListener('close',()=>{lbm.innerHTML=''});
+document.addEventListener('keydown',e=>{if(!lb.open)return;if(e.key==='ArrowRight')open((idx+1)%G.length);if(e.key==='ArrowLeft')open((idx-1+G.length)%G.length)});
+q.addEventListener('input',render);render();
+const m=location.hash.match(/#p([0-9]+)/);if(m)open(+m[1]-1);
+})();
+</script>
+
+<footer class="colophon"><div class="wrap"><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="../">The moving sale</a><a class="next" href="exchange.html">Next: Exchange Students &rarr;</a></div></footer>
+</body>
+</html>
