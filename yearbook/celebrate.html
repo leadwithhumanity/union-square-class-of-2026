@@ -31,6 +31,9 @@
 .ev2 ul{margin:0;padding-left:18px}
 .ev2 li{margin:4px 0}
 .ev2 img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.cal{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.cal a{font-family:var(--display);font-weight:700;font-size:.92rem;text-decoration:none;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink);border-radius:999px;padding:7px 12px}
+.cal a:hover{background:var(--ink);color:var(--bg)}
 .rsvp{margin-top:50px;background:var(--navy);color:var(--bg);border-radius:18px;padding:34px 30px}
 .rsvp h2{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;margin-bottom:6px}
 .rsvp p{color:rgba(250,244,234,.8)}
@@ -44,6 +47,14 @@
 .rsvp .btn{grid-column:1/-1;background:var(--gold);color:var(--ink);justify-content:center;margin-top:6px}
 .rsvp .alt{grid-column:1/-1;font-size:.95rem;color:rgba(250,244,234,.75)}
 .rsvp .alt a{color:var(--bg)}
+.updates{margin-top:30px}
+.updates .box{background:var(--sky);border-radius:18px;padding:30px;display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center}
+.updates h2{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:800;margin-bottom:6px}
+.updates p{margin:0;color:var(--ink)}
+.updates form{display:grid;gap:10px}
+.updates input{font:inherit;font-size:1.05rem;padding:12px 14px;border:0;border-radius:10px;background:var(--paper)}
+.updates .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:760px){.updates .box{grid-template-columns:1fr}}
 .moments{margin-top:50px}
 .moments h2{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;margin-bottom:6px}
 .moments .lead{max-width:66ch;color:var(--muted);margin-bottom:18px}
@@ -64,10 +75,10 @@
 <section class="wrap events">
   <article class="ev2"><img src="tour/now_19.jpg" alt=""><div class="date"><b>23</b><span>Friday, October</span></div><div class="body"><h2>Graduation Gathering</h2><div class="when">5 to 8 pm at 224, with a sunset toast on the rooftop deck around 6:45</div>
   <p>We close on the loft at noon that day. By five, the gym is ours for one more evening. Come for the whole thing or for the toast.</p>
-  <ul><li>Charcuterie and Fratelli's pizza; bring nothing but a memory</li><li>Sunset toast to the starlight and the window, weather permitting on the roof, otherwise under the window</li><li>The guest journals, out on the butcher block for one last signing, and guest-book hour at 6</li><li>Class photo under the window at the toast, with the starlight on</li></ul></div></article>
+  <ul><li>Charcuterie and Fratelli's pizza; bring nothing but a memory</li><li>Sunset toast to the starlight and the window, weather permitting on the roof, otherwise under the window</li><li>The guest journals, out on the butcher block for one last signing, and guest-book hour at 6</li><li>Class photo under the window at the toast, with the starlight on</li></ul><div class="cal"><a href="graduation-gathering.ics" download>Add to calendar (.ics)</a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Graduation+Gathering+at+the+Loft+(Brian+and+Erica)&dates=20261023T210000Z/20261024T000000Z&details=5+to+8+pm.+Sunset+toast+around+6:45.+RSVP+and+details:+https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html&location=600+Broadway+Ave+NW+%23224,+Grand+Rapids,+MI+49504" target="_blank" rel="noopener">Google Calendar</a></div></div></article>
   <article class="ev2"><img src="tour/now_15.jpg" alt=""><div class="date"><b>24</b><span>Saturday, October</span></div><div class="body"><h2>Open Gym: the last look</h2><div class="when">2 to 5 pm, drop in</div>
   <p>A slower, daylight version for neighbors, former guests, kids and anyone who could not make Friday. Walk the three floors, stand at the window, find your picture in the yearbook, sign it.</p>
-  <ul><li>Walk the three floors one last time; record your Loft story upstairs if you like</li><li>Find yourself: the class photos on the big screen; tag your picture and leave a note</li><li>Estate sale pickups: anything you bought, or still want, goes home with you today</li><li>Kids welcome; the rooftop pool is closed for the season</li></ul></div></article>
+  <ul><li>Walk the three floors one last time; record your Loft story upstairs if you like</li><li>Find yourself: the class photos on the big screen; tag your picture and leave a note</li><li>Estate sale pickups: anything you bought, or still want, goes home with you today</li><li>Kids welcome; the rooftop pool is closed for the season</li></ul><div class="cal"><a href="open-gym.ics" download>Add to calendar (.ics)</a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Open+Gym:+the+last+look+at+the+Loft&dates=20261024T180000Z/20261024T210000Z&details=2+to+5+pm,+drop+in.+https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html&location=600+Broadway+Ave+NW+%23224,+Grand+Rapids,+MI+49504" target="_blank" rel="noopener">Google Calendar</a></div></div></article>
 </section>
 <section class="wrap rsvp"><h2>RSVP</h2><p>Tell us which day (or both) and how many. We read every one.</p>
 <form name="rsvp" method="POST" action="rsvp-thanks.html" data-netlify="true" netlify-honeypot="bot-field" class="grid"><input type="hidden" name="form-name" value="rsvp"><p hidden><label>Leave this empty <input name="bot-field"></label></p>
@@ -76,10 +87,13 @@
   <div><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email"></div>
   <div><label for="r-phone">Phone (for day-of texts)</label><input id="r-phone" name="phone" type="tel" autocomplete="tel"></div>
   <div class="checks"><label><input type="checkbox" name="events" value="Fri Oct 23 gathering"> Friday 23, Graduation Gathering</label><label><input type="checkbox" name="events" value="Fri Oct 23 sunset toast only"> Friday, just the sunset toast</label><label><input type="checkbox" name="events" value="Sat Oct 24 open gym"> Saturday 24, Open Gym</label><label><input type="checkbox" name="events" value="Cannot come, sending a note"> Can't make it, but I'll sign the yearbook</label></div>
+  <div class="checks" style="margin-top:-4px"><label><input type="checkbox" name="updates" value="yes" checked> Keep me posted on the next chapter (occasional email, no spam)</label></div>
   <div style="grid-column:1/-1"><label for="r-note">Anything we should know (a memory to share, a dish you're bringing anyway, accessibility)</label><textarea id="r-note" name="note"></textarea></div>
   <button class="btn" type="submit">Send RSVP</button>
   <p class="alt">Rather text? <a href="sms:+16165819272?&body=RSVP%20for%20224%3A%20">Text Erica</a> with your name, which day, and how many.</p>
 </form></section>
+<section class="wrap updates"><div class="box"><div><div class="folio">The next chapter</div><h2>Keep in touch after the keys change hands</h2><p>An occasional email from the lakeshore: where we landed, what we're hosting next, and the odd postcard. No more than a few a year.</p></div>
+<form name="updates" method="POST" action="updates-thanks.html" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="updates"><p hidden><label>Leave this empty <input name="bot-field"></label></p><label for="u-email" class="vh">Email</label><input id="u-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email"><input name="name" placeholder="Your name (optional)" autocomplete="name"><button class="btn" type="submit">Sign me up</button></form></div></section>
 <section class="wrap moments"><h2>Ways to take part</h2><p class="lead">Nothing to buy and nothing to prepare. Pick the ones that speak to you; they are built so that anyone can join in the moment they arrive.</p>
 <div class="mgrid">
   <div class="m"><div class="t">Friday and Saturday</div><h3>Sign the yearbook</h3><p>The four guest journals on the butcher block, plus the online Autographs page by QR. Both go into the record.</p></div>

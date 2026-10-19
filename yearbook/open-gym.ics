@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Union Square Class of 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:opengym-2026@union-square-class-of-2026.netlify.app
+DTSTAMP:20261019T170000Z
+DTSTART:20261024T180000Z
+DTEND:20261024T210000Z
+SUMMARY:Open Gym: the last look at the Loft (Brian and Erica)
+LOCATION:The Loft at Union Square\, 600 Broadway Ave NW #224\, Grand Rapids\, MI 49504
+DESCRIPTION:2 to 5 pm\, drop in. Walk the three floors\, find your picture in the yearbook\, estate sale pickups. https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html
+URL:https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html
+END:VEVENT
+END:VCALENDAR
