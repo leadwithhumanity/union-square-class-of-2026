@@ -6,11 +6,11 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:grad-2026@union-square-class-of-2026.netlify.app
 DTSTAMP:20261019T170000Z
-DTSTART:20261023T204400Z
+DTSTART:20261023T210000Z
 DTEND:20261024T000000Z
 SUMMARY:Gathering at the Loft (Brian and Erica)
 LOCATION:The Loft at Union Square\, 600 Broadway Ave NW #224\, Grand Rapids\, MI 49504
-DESCRIPTION:Doors open 4:44 to 8 pm. Charcuterie\, champagne and house tours. Rooftop hot tubs will be available. Last Light at 5:55 (please arrive by 5:45): memories and appreciations\, release and blessing\, seated sound bath\, sunset 6:47 and a champagne toast. https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html
+DESCRIPTION:5 to 8 pm. Charcuterie\, champagne and house tours. Feast of Memories at 6: share your favorite memory of this place. Sunset toast at 6:47. https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html
 URL:https://union-square-class-of-2026.netlify.app/yearbook/celebrate.html
 END:VEVENT
 END:VCALENDAR
