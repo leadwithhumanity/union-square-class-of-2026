@@ -1,0 +1,56 @@
+/* Union Square Class of 2026: yearbook pages. Shared tokens with the sale catalog. */
+:root{
+  --bg:#FAF4EA;--paper:#FFFFFF;--ink:#2C221D;--muted:#7A6A5F;--line:#E9DCCB;
+  --maple:#B5402C;--gold:#D89E2F;--accent:#E8732A;--sky:#D9E5F8;--navy:#1F2A44;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif;--hand:"Caveat",cursive;
+  --shadow:0 1px 2px rgba(44,34,29,.06),0 14px 34px -18px rgba(44,34,29,.28);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.01em}
+p{margin:0 0 1em}
+.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* spine: the thin strip that runs across every page */
+.spine{position:sticky;top:0;z-index:50;background:var(--ink);color:var(--bg);font-family:var(--display);font-size:15px}
+.spine .wrap{display:flex;align-items:center;gap:22px;height:50px}
+.spine .mark{font-weight:800;white-space:nowrap;text-decoration:none;letter-spacing:.01em}
+.spine .mark span{color:var(--gold)}
+.spine nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.spine nav::-webkit-scrollbar{display:none}
+.spine nav a{text-decoration:none;padding:6px 10px;border-radius:999px;white-space:nowrap;opacity:.78;font-weight:600}
+.spine nav a:hover{opacity:1}
+.spine nav a[aria-current=page]{background:var(--bg);color:var(--ink);opacity:1}
+.spine nav a.sale{color:var(--gold);opacity:1}
+
+/* page headers */
+.pagehead{padding:56px 0 24px}
+.pagehead h1{font-size:clamp(2.6rem,7vw,5.4rem);font-weight:800}
+.pagehead .sub{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:62ch;margin-top:14px;color:var(--muted)}
+.folio{font-family:var(--display);font-weight:600;color:var(--maple);font-size:.95rem;margin-bottom:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:12px 20px;font-size:1rem;cursor:pointer;text-decoration:none}
+.btn.maple{background:var(--maple)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+
+/* footer */
+.colophon{margin-top:80px;padding:34px 0 60px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
+.colophon .wrap{display:flex;flex-wrap:wrap;gap:14px 34px;align-items:baseline}
+.colophon a{color:var(--ink)}
+.colophon .next{margin-left:auto;font-family:var(--display);font-weight:700;color:var(--ink);text-decoration:none;font-size:1.05rem}
+.colophon .next:hover{color:var(--maple)}
+
+@media (max-width:700px){
+  body{font-size:16px}
+  .wrap{width:calc(100% - 32px)}
+  .spine .wrap{gap:12px}
+  .spine .mark{font-size:14px}
+  .pagehead{padding:34px 0 16px}
+}

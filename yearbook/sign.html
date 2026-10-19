@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Autographs, Union Square Class of 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Sign Brian and Erica&#x27;s yearbook: leave a note about the Loft at Union Square.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://union-square-class-of-2026.netlify.app/yearbook/sign.html">
+<meta property="og:title" content="Autographs, Union Square Class of 2026">
+<meta property="og:description" content="Sign Brian and Erica&#x27;s yearbook: leave a note about the Loft at Union Square.">
+<meta property="og:image" content="https://union-square-class-of-2026.netlify.app/yearbook/img/loft_17.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/photos/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="yearbook.css">
+<style>
+.pg-sign .pagehead{padding-bottom:10px}
+.signgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start;padding-top:20px}
+.lined{background:var(--paper);border-radius:14px;box-shadow:var(--shadow);padding:30px 34px;background-image:repeating-linear-gradient(180deg,transparent 0 35px,var(--line) 35px 36px);background-position:0 18px;min-height:420px}
+.entry{font-family:var(--hand);font-size:1.6rem;line-height:36px;margin:0 0 36px;position:relative}
+.entry .who{font-weight:700;color:var(--maple)}
+.entry:nth-child(3n) {transform:rotate(-.6deg)}.entry:nth-child(3n+1){transform:rotate(.5deg)}
+.empty{font-family:var(--hand);font-size:1.8rem;line-height:36px;color:var(--muted)}
+.form{background:var(--navy);color:var(--bg);border-radius:14px;padding:28px 28px 26px;position:sticky;top:70px}
+.form h2{font-size:1.6rem;font-weight:800;margin-bottom:6px}
+.form p{color:rgba(250,244,234,.8);font-size:.98rem}
+.form label{display:block;font-family:var(--display);font-weight:700;font-size:.95rem;margin:14px 0 6px}
+.form input,.form textarea{width:100%;font:inherit;font-size:1.05rem;padding:11px 14px;border:0;border-radius:10px;background:var(--bg);color:var(--ink)}
+.form textarea{min-height:120px;resize:vertical;font-family:var(--hand);font-size:1.4rem}
+.form .btn{margin-top:18px;background:var(--gold);color:var(--ink);width:100%;justify-content:center}
+.qr{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:50px;padding:24px;border:2px dashed var(--ink);border-radius:14px}
+.qr img{width:150px;border-radius:8px}
+.qr h2{font-size:1.4rem;font-weight:800;margin-bottom:6px}
+@media (max-width:800px){.signgrid{grid-template-columns:1fr}.form{position:static}.qr{grid-template-columns:1fr}}
+@media print{.spine,.form,.colophon,.qr p{display:none}.lined{box-shadow:none}}
+</style>
+
+</head>
+<body class="pg-sign">
+<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html">Cover</a><a href="history.html">Class History</a><a href="exchange.html">Exchange Students</a><a href="news.html">In the News</a><a href="honor.html">Honor Roll</a><a href="give.html">Give</a><a href="after.html">After Graduation</a><a href="sign.html" aria-current=page>Autographs</a><a class="sale" href="../">Sale</a></nav></div></header>
+
+<section class="pagehead"><div class="wrap"><div class="folio">Autographs</div><h1>Sign our yearbook</h1><p class="sub">Stayed here, partied here, fixed something here, grew up down the street? Leave Brian and Erica a note. Signatures appear once they have read them.</p></div></section>
+<section class="wrap signgrid">
+  <div class="lined" id="entries"><p class="empty">The first signature goes here. Be the one.</p></div>
+  <form class="form" name="guestbook" method="POST" action="signed.html" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="guestbook"><p hidden><label>Leave this empty <input name="bot-field"></label></p>
+    <h2>Your autograph</h2><p>A sentence or a story. A memory of the Loft, or of the school, if you went here.</p>
+    <label for="g-name">Name</label><input id="g-name" name="name" required autocomplete="name">
+    <label for="g-from">Where you're from (optional)</label><input id="g-from" name="from" autocomplete="address-level2">
+    <label for="g-msg">Your message</label><textarea id="g-msg" name="message" required maxlength="900"></textarea>
+    <label for="g-email">Email (never shown, so they can write back)</label><input id="g-email" name="email" type="email" autocomplete="email">
+    <button class="btn" type="submit">Sign the yearbook</button>
+  </form>
+</section>
+<section class="wrap qr"><img src="img/sign-qr.png" alt="QR code linking to this page"><div><h2>At the farewell gathering, October 23</h2><p>Point your phone at the square and your autograph lands on this page. Or print this page and leave it by the physical guestbook.</p></div></section>
+
+<footer class="colophon"><div class="wrap"><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="../">The moving sale</a><a class="next" href="index.html">Next: The Yearbook &rarr;</a></div></footer>
+</body>
+</html>
