@@ -1,0 +1,8 @@
+{
+  "name": "union-square-class-of-2026",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "11.1.4"
+  }
+}
