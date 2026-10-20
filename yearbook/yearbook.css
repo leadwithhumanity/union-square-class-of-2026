@@ -93,3 +93,4 @@ figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow
 @media (max-width:520px){.pager a{padding:12px 14px}.pager a span{font-size:1.05rem}}
 @media print{.pager,.spine .arr{display:none}}
 @media (max-width:700px){.spine .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:2px;row-gap:2px}.spine .tabs{width:100%;margin-left:0}.spine .tabs nav{flex:1}}
+.gblink{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
