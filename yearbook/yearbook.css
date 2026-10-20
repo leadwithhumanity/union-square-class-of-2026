@@ -1,14 +1,14 @@
 /* Union Square Class of 2026: yearbook pages. Shared tokens with the sale catalog. */
 :root{
-  --bg:#FAF9F6;--paper:#FFFFFF;--ink:#151515;--muted:#5C5752;--line:#E2DED7;
+  --bg:#FAF9F6;--paper:#FFFFFF;--ink:#151515;--muted:#45403C;--line:#E2DED7;
   --maple:#7D1D2C;--gold:#E3A21A;--accent:#E3A21A;--sky:#F7ECD2;--navy:#4A111B;
-  --display:"Big Shoulders Display","Arial Narrow",sans-serif;--body:"Nunito Sans",system-ui,sans-serif;--hand:"Caveat",cursive;
+  --display:"Archivo",system-ui,sans-serif;--body:"Nunito Sans",system-ui,sans-serif;--hand:"Kalam",cursive;
   --shadow:0 2px 3px rgba(0,0,0,.08),0 12px 24px -12px rgba(0,0,0,.35);
   color-scheme:light;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;}
 img{max-width:100%;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:var(--display);line-height:.98;margin:0;letter-spacing:0;font-weight:800}
@@ -18,13 +18,13 @@ p{margin:0 0 1em}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* spine: maroon binding with gold foil, numbered like the book's sections */
-.spine{position:sticky;top:0;z-index:50;background:var(--maple);color:#fff;font-family:var(--display);font-size:16px;border-bottom:4px solid var(--gold);box-shadow:inset 0 6px 0 rgba(255,255,255,.06)}
+.spine{position:sticky;top:0;z-index:50;background:var(--maple);color:#fff;font-family:var(--display);font-size:14px;border-bottom:4px solid var(--gold);box-shadow:inset 0 6px 0 rgba(255,255,255,.06)}
 .spine .wrap{display:flex;align-items:center;gap:22px;height:52px}
 .spine .mark{font-weight:900;white-space:nowrap;text-decoration:none;text-transform:uppercase;letter-spacing:.04em;font-size:18px;color:var(--gold)}
 .spine .mark span{color:#fff}
 .spine nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto;counter-reset:pg}
 .spine nav::-webkit-scrollbar{display:none}
-.spine nav a{text-decoration:none;padding:6px 9px;white-space:nowrap;opacity:.85;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-bottom:3px solid transparent}
+.spine nav a{text-decoration:none;padding:6px 9px;white-space:nowrap;opacity:.92;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-bottom:3px solid transparent}
 .spine nav a .n{color:var(--gold);margin-right:5px;font-weight:900}
 .spine nav a:hover{opacity:1}
 .spine nav a[aria-current=page]{opacity:1;border-bottom-color:var(--gold)}
@@ -32,9 +32,9 @@ p{margin:0 0 1em}
 
 /* page headers: giant condensed section title with a script accent, 2000s yearbook style */
 .pagehead{padding:52px 0 24px}
-.pagehead h1{font-size:clamp(3.2rem,10vw,7.5rem);font-weight:900;text-transform:uppercase;letter-spacing:-.005em;line-height:.86}
+.pagehead h1{font-size:clamp(2.6rem,8vw,5.6rem);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:.95}
 .pagehead .sub{font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:62ch;margin-top:16px;color:var(--muted)}
-.folio{font-family:var(--hand);font-weight:700;color:var(--maple);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1;margin-bottom:2px;transform:rotate(-3deg);transform-origin:left bottom;display:inline-block}
+.folio{font-family:var(--hand);font-weight:700;color:var(--maple);font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.1;margin-bottom:2px;transform:rotate(-3deg);transform-origin:left bottom;display:inline-block}
 
 /* printed photos: white border and a drop shadow, like a glossy page */
 figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow)}
@@ -46,7 +46,7 @@ figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
 
 /* footer: running foot with the page number, like the bottom of a printed page */
-.colophon{margin-top:80px;padding:22px 0 50px;border-top:4px solid var(--maple);font-size:.95rem;color:var(--muted)}
+.colophon{margin-top:80px;padding:22px 0 50px;border-top:4px solid var(--maple);font-size:1rem;color:var(--muted)}
 .colophon .wrap{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:baseline}
 .colophon .pageno{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;color:var(--maple)}
 .colophon .runfoot{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink)}
@@ -66,3 +66,6 @@ figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow
 /* printed-page corners: cards and boxes get crisp corners, like pages pasted in a yearbook */
 .ev2,.feature,.org,.card,.day,.stat,.rv,.o,.plaque,.form,.lined,.why,.box,.evt,.qr,.twentyfive,.toc2 a,.toc2 li,.done,.half,.ev2 .body{border-radius:3px!important}
 .toc2 img{border-radius:0!important}
+
+/* legibility: heavy wide headings read better than condensed */
+.spine .mark{font-size:16px}
