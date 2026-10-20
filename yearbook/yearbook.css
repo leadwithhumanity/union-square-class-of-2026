@@ -1,7 +1,7 @@
 /* Union Square Class of 2026: yearbook pages. Shared tokens with the sale catalog. */
 :root{
   --bg:#FAF9F6;--paper:#FFFFFF;--ink:#151515;--muted:#45403C;--line:#E2DED7;
-  --maple:#C2410C;--gold:#F15A24;--accent:#F15A24;--sky:#D3E6F4;--navy:#3D3D3F;
+  --maple:#B54A17;--gold:#FF8449;--accent:#FF8449;--sky:#D3E6F4;--navy:#3D3D3F;
   --display:"Archivo",system-ui,sans-serif;--body:"Nunito Sans",system-ui,sans-serif;--hand:"Kalam",cursive;
   --shadow:0 2px 3px rgba(0,0,0,.08),0 12px 24px -12px rgba(0,0,0,.35);
   color-scheme:light;
