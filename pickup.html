@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Furniture Pickup, Union Square Class of 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Pick a 30-minute time to pick up your furniture from the Loft at Union Square, Thursday Oct 29 or Friday Oct 30, 9 am to 7 pm.">
+<meta property="og:title" content="Schedule your furniture pickup">
+<meta property="og:description" content="Thursday Oct 29 or Friday Oct 30, 9 am to 7 pm. 600 Broadway Ave NW, Grand Rapids.">
+<meta property="og:image" content="https://union-square-class-of-2026.netlify.app/photos/og.jpg">
+<link rel="icon" href="/photos/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..800;1,6..12,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/yearbook/yearbook.css">
+<script>try{if("scrollRestoration" in history)history.scrollRestoration="manual";if(!location.hash){var t=function(){window.scrollTo(0,0)};t();addEventListener("load",t);addEventListener("pageshow",t)}}catch(e){}</script>
+<style>
+.top{background:var(--maple);color:#fff;padding:13px 0;border-bottom:4px solid var(--gold)}
+.top .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--display);font-weight:700}
+.top a{color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.03em}.top a span{color:var(--gold)}
+.head{padding:34px 0 10px}
+.head h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,8vw,4.6rem);line-height:.88}
+.head p{max-width:60ch;margin-top:12px;color:var(--muted);font-size:1.05rem}
+.head .where{color:var(--ink);font-weight:600}
+.days{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.day{background:var(--paper);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.day h2{font-family:var(--display);font-weight:800;font-size:1.35rem;margin-bottom:12px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.slot{font:600 .98rem var(--display);border:2px solid var(--ink);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 6px;cursor:pointer}
+.slot:hover{border-color:var(--maple)}
+.slot[aria-pressed=true]{background:var(--maple);border-color:var(--maple);color:var(--bg)}
+.slot:disabled{border-color:var(--line);color:var(--muted);background:transparent;cursor:not-allowed;text-decoration:line-through}
+.form{margin-top:22px;background:var(--paper);border-radius:16px;padding:22px;box-shadow:var(--shadow);display:grid;gap:12px;max-width:640px}
+.form h2{font-family:var(--display);font-weight:800;font-size:1.35rem}
+.form .picked{font-family:var(--display);font-weight:700;color:var(--maple);font-size:1.1rem}
+.form label{display:grid;gap:6px;font-family:var(--display);font-weight:700}
+.form input,.form textarea{font:inherit;font-size:1.05rem;padding:11px 14px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.form textarea{min-height:76px;resize:vertical}
+.form .btn{justify-self:start}
+.err{color:var(--maple);font-weight:600;min-height:1.2em}
+.done{margin-top:22px;background:var(--ink);color:var(--bg);border-radius:16px;padding:26px;max-width:640px}
+.done h2{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:8px}
+.done p{color:rgba(250,244,234,.9)}
+.done .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.done .btn{background:var(--gold);color:var(--ink)}
+.done .ghost{background:transparent;color:var(--bg);box-shadow:inset 0 0 0 2px var(--bg)}
+.note{color:var(--muted);font-size:.95rem;margin:26px 0 50px}
+.note a{color:var(--ink)}
+[hidden]{display:none!important}
+@media (max-width:700px){.days{grid-template-columns:1fr}.slots{grid-template-columns:repeat(4,1fr)}.slot{font-size:.9rem;padding:10px 2px}}
+@media (max-width:360px){.slots{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><a href="/">Union Square <span>Class of 2026</span></a><a href="/">Shop the estate sale &rarr;</a></div></div>
+<main class="wrap">
+  <section class="head">
+    <h1>Schedule your furniture&nbsp;pickup</h1>
+    <p>Thursday, Oct 29 and Friday, Oct 30, 9 am to 7 pm. Pick a 30-minute time and we'll hold it for you. <span class="where">600 Broadway Ave NW #224, Grand Rapids.</span> Bring a friend for the big pieces.</p>
+  </section>
+  <div class="days" id="days" aria-live="polite"></div>
+  <form class="form" id="form" hidden novalidate>
+    <h2>Hold this time</h2>
+    <div class="picked" id="picked"></div>
+    <label>Your name<input id="name" autocomplete="name" required></label>
+    <label>Cell (so Brian can text you)<input id="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+    <label>What you're picking up<textarea id="items" placeholder="The blue sofa and the bar stools"></textarea></label>
+    <p hidden><label>Leave this empty<input id="website" tabindex="-1" autocomplete="off"></label></p>
+    <div class="err" id="err" role="alert"></div>
+    <button class="btn" id="book" type="submit">Hold this time</button>
+  </form>
+  <section class="done" id="done" hidden>
+    <h2 id="doneh"></h2>
+    <p>One last step: send Brian a quick text so he knows to expect you.</p>
+    <div class="row"><a class="btn" id="sms" href="#">Text Brian</a><button class="btn ghost" id="copy" type="button">Copy the message</button></div>
+    <p style="margin-top:14px">Brian: 616-340-3123</p>
+  </section>
+  <p class="note">Need a different time, or bringing a truck? Text Brian at 616-340-3123. Smaller pieces can go home with you when you join us Friday, Oct 23 or Saturday, Oct 24. All funds support the City Wide Clean Up. <a href="/yearbook/">Open the yearbook</a></p>
+</main>
+<script>
+(function(){
+var API='/api/pickup',PHONE='+16163403123';
+var days=document.getElementById('days'),form=document.getElementById('form'),picked=document.getElementById('picked'),err=document.getElementById('err');
+var chosen=null,slots=[],taken=new Set(),offline=false;
+var qs=new URLSearchParams(location.search);if(qs.get('item'))document.getElementById('items').value=qs.get('item');
+function fmt(m){var h=Math.floor(m/60),mm=m%60,ap=h>=12?'pm':'am',h12=h%12||12;return h12+':'+String(mm).padStart(2,'0')+' '+ap}
+function fallback(){var out=[],D=[['2026-10-29','Thursday, Oct 29'],['2026-10-30','Friday, Oct 30']];D.forEach(function(d){for(var m=540;m<1140;m+=30){var hh=String(Math.floor(m/60)).padStart(2,'0'),mm=String(m%60).padStart(2,'0');out.push({id:d[0]+'-'+hh+mm,day:d[1],date:d[0],minutes:m})}});return out}
+function render(){days.innerHTML='';var groups={};slots.forEach(function(s){(groups[s.day]=groups[s.day]||[]).push(s)});
+Object.keys(groups).forEach(function(day){var box=document.createElement('section');box.className='day';var h=document.createElement('h2');h.textContent=day;box.appendChild(h);var g=document.createElement('div');g.className='slots';
+groups[day].forEach(function(s){var b=document.createElement('button');b.type='button';b.className='slot';b.textContent=fmt(s.minutes);var t=taken.has(s.id);b.disabled=t;b.setAttribute('aria-pressed',String(!!(chosen&&chosen.id===s.id)));b.setAttribute('aria-label',day+' '+fmt(s.minutes)+(t?', taken':''));
+b.onclick=function(){chosen=s;render();form.hidden=false;picked.textContent=s.day+' at '+fmt(s.minutes);err.textContent='';setTimeout(function(){form.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('name').focus({preventScroll:true})},50)};g.appendChild(b)});
+box.appendChild(g);days.appendChild(box)})}
+function load(){return fetch(API,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){slots=d.slots;taken=new Set(d.taken);offline=false;if(chosen&&taken.has(chosen.id)){chosen=null;form.hidden=true}render()}).catch(function(){slots=fallback();offline=true;render()})}
+function message(s,n,p,i){return 'Hi Brian, this is '+n+'. I booked furniture pickup at the Loft for '+s.day+' at '+fmt(s.minutes)+(i?': '+i:'')+'. My cell is '+p+'.'}
+function finish(s,n,p,i){var msg=message(s,n,p,i);document.getElementById('doneh').textContent=offline?('Almost set for '+s.day+' at '+fmt(s.minutes)):("You're set for "+s.day+' at '+fmt(s.minutes)+'.');
+document.getElementById('sms').href='sms:'+PHONE+'?&body='+encodeURIComponent(msg);document.getElementById('copy').onclick=function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(msg):Promise.reject()).then(function(){b.textContent='Copied'}).catch(function(){prompt('Copy this message',msg)})};
+form.hidden=true;days.hidden=true;var d=document.getElementById('done');d.hidden=false;d.scrollIntoView({behavior:'smooth',block:'start'})}
+form.addEventListener('submit',function(e){e.preventDefault();if(!chosen){err.textContent='Please pick a time.';return}
+var n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),i=document.getElementById('items').value.trim();
+if(n.length<2){err.textContent='Please add your name.';return}if(p.replace(/\D/g,'').length<10){err.textContent='Please add a cell number Brian can text.';return}
+if(offline){finish(chosen,n,p,i);return}
+var btn=document.getElementById('book');btn.disabled=true;btn.textContent='Holding...';
+fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({slot:chosen.id,name:n,phone:p,items:i,website:document.getElementById('website').value})})
+.then(function(r){return r.json().then(function(d){return{s:r.status,d:d}})}).then(function(x){btn.disabled=false;btn.textContent='Hold this time';
+if(x.s===200&&x.d.ok){finish(chosen,n,p,i);return}err.textContent=x.d.error||'Something went wrong. Please try again.';if(x.s===409){taken.add(chosen.id);chosen=null;render();picked.textContent='Pick another time above.'}})
+.catch(function(){btn.disabled=false;btn.textContent='Hold this time';err.textContent='Could not reach the server. Text Brian at 616-340-3123 instead.'})});
+load();setInterval(function(){if(!document.hidden&&document.getElementById('done').hidden)load()},30000);
+})();
+</script>
+</body>
+</html>
