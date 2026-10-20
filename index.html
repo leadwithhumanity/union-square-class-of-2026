@@ -18,6 +18,7 @@
 </head>
 <body>
 <a class="yearbar" href="/yearbook/" style="display:flex;justify-content:center;gap:8px;align-items:center;background:#2C221D;color:#FAF4EA;text-decoration:none;font:600 15px/1 'Bricolage Grotesque',system-ui,sans-serif;padding:13px 16px;letter-spacing:.01em">The Yearbook: 20 years, the class photos, the guest reviews, the honor roll, and a page to sign <span style="color:#D89E2F">&rarr;</span></a>
+<form name="claim" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="kind"><input name="item"><input name="price"><input name="name"><input name="phone"><input name="email"><input name="bot-field"></form>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&display=swap">
 <style id="css">
@@ -249,7 +250,7 @@ body.owner-mode .card .own{display:flex}
     if(!isB && isNew(it)) h += '<span class="tag">New this week</span>';
     if(it.status==='sold') h += '<div class="stamp">Graduated</div>';
     if(it.status==='pending') h += '<div class="ribbon">Spoken for</div>';
-    h += '<a class="price" href="'+esc(venmo(it))+'" target="_blank" rel="noopener" title="Pay '+money(it.price)+' with Venmo and it is yours">'+money(it.price)+'<small>VENMO</small></a>';
+    h += it.status==='available' ? '<a class="price" href="#" data-claim="'+esc(it.id)+'" title="Claim it, then pay with Venmo">'+money(it.price)+'<small>CLAIM IT</small></a>' : '<span class="price">'+money(it.price)+'</span>';
     h += '</div>';
     if(!isB && it.photos.length>1){
       h += '<div class="thumbs">'+it.photos.map(function(p,i){return '<button class="thumb" type="button" data-src="'+esc(photoSrc(p))+'" aria-current="'+(i===0)+'" aria-label="Photo '+(i+1)+'"><img src="'+esc(photoSrc(p))+'" alt="" loading="lazy"></button>';}).join('')+'</div>';
@@ -261,7 +262,7 @@ body.owner-mode .card .own{display:flex}
     if(it.dims) h += '<div class="dims">'+esc(it.dims)+'</div>';
     if(it.note) h += '<div class="note">'+esc(it.note)+'</div>';
     if(it.status==='available'){
-      h += '<div class="actions"><button class="btn primary" type="button" data-claim="'+esc(it.id)+'">I’ll take it</button><button class="btn" type="button" data-offer="'+esc(it.id)+'">Make an offer</button><button class="btn" type="button" data-ask="'+esc(it.id)+'">Ask a question</button></div>';
+      h += '<div class="actions"><button class="btn primary" type="button" data-claim="'+esc(it.id)+'">I’ll take it</button><button class="btn" type="button" data-ask="'+esc(it.id)+'">Ask a question</button></div>';
     } else if(it.status==='pending'){
       h += '<div class="actions"><span class="btn" aria-disabled="true">Spoken for, pending pickup</span></div>';
     } else {
@@ -341,7 +342,61 @@ body.owner-mode .card .own{display:flex}
   function toast(msg){var r=document.getElementById('toast-root');r.innerHTML='<div class="toast">'+esc(msg)+'</div>';setTimeout(function(){r.innerHTML='';},2400);}
   function copyText(v){try{navigator.clipboard.writeText(v).then(function(){toast('Copied');},function(){toast('Select the text to copy it');});}catch(err){toast('Select the text to copy it');}}
 
+  var API='/api/claim', apiOK=false, PICKUP='/pickup.html';
+  var needRender=false;
+  function applyClaims(ids,defer){
+    ids.forEach(function(id){var x=find(id); if(x&&x.status==='available') x.status='pending';});
+    state.items.forEach(function(b){
+      if(!b.includes) return;
+      if(b.status==='available' && b.includes.some(function(i){return ids.indexOf(i)>-1;})) b.status='pending';
+      if(ids.indexOf(b.id)>-1) b.includes.forEach(function(i){var x=find(i); if(x&&x.status==='available') x.status='pending';});
+    });
+    if(defer) needRender=true; else render();
+  }
+  function notify(fields){ try{ fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(Object.assign({'form-name':'claim'},fields)).toString()}); }catch(e){} }
+  function claimDialog(it){
+    var root=document.getElementById('dlg-root');
+    root.innerHTML='<div class="dlg" role="dialog" aria-label="Claim it: '+esc(it.name)+'"><div class="box"><button class="x" type="button" aria-label="Close">×</button><h3>Claim it: '+esc(it.name)+'</h3><p>Claim it here and it\u2019s held for you. Then pay with Venmo, or bring cash at pickup.</p>'+
+      '<label for="c-name">Your name</label><input id="c-name" type="text" autocomplete="name">'+
+      '<label for="c-phone">Cell, so we can reach you about pickup</label><input id="c-phone" type="tel" inputmode="tel" autocomplete="tel">'+
+      '<label for="c-email">Email (optional)</label><input id="c-email" type="email" autocomplete="email">'+
+      '<p hidden><input id="c-web" tabindex="-1" autocomplete="off"></p><div class="msg" id="c-err" role="alert" style="color:#B5402C"></div>'+
+      '<div class="acts"><button class="btn primary" id="c-go" type="button">Claim it for '+money(it.price)+'</button></div></div></div>';
+    var box=root.querySelector('.box');
+    function vals(){return {name:(document.getElementById('c-name').value||'').trim(),phone:(document.getElementById('c-phone').value||'').trim(),email:(document.getElementById('c-email').value||'').trim()};}
+    document.getElementById('c-go').addEventListener('click',function(){
+      var v=vals(), err=document.getElementById('c-err'), btn=this;
+      if(v.name.length<2){err.textContent='Please add your name.';return;}
+      if(v.phone.replace(/\D/g,'').length<10){err.textContent='Please add a cell number we can text.';return;}
+      btn.disabled=true; btn.textContent='Holding it\u2026';
+      fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'claim',id:it.id,item:it.name,name:v.name,phone:v.phone,email:v.email,website:document.getElementById('c-web').value})})
+      .then(function(r){return r.json().then(function(d){return {s:r.status,d:d};});})
+      .then(function(x){
+        if(x.s===200 && x.d.ok){
+          notify({kind:'Claimed',item:it.name,price:money(it.price),name:v.name,phone:v.phone,email:v.email});
+          applyClaims([it.id],true);
+          box.innerHTML='<button class="x" type="button" aria-label="Close">×</button><h3>It\u2019s yours, '+esc(v.name.split(' ')[0])+'.</h3><p><b>'+esc(it.name)+'</b> is held for you. Pay '+money(it.price)+' now with Venmo, or bring cash at pickup.</p>'+
+            '<div class="acts"><a class="btn primary" href="'+esc(venmo(it))+'" rel="noopener">Pay '+money(it.price)+' with Venmo</a><a class="btn" href="'+PICKUP+'?item='+encodeURIComponent(it.name)+'">Schedule your pickup</a></div>'+
+            '<p style="margin-top:10px">Furniture pickup is '+esc(state.pickupBy)+', 9 am to 7 pm. Smaller pieces can go home with you when you join us Friday or Saturday.</p>';
+          return;
+        }
+        if(x.s===409){
+          applyClaims([it.id],true);
+          box.innerHTML='<button class="x" type="button" aria-label="Close">×</button><h3>Someone just claimed this one.</h3><p>Want to be next in line? If it opens up, we\u2019ll text you.</p><div class="acts"><button class="btn primary" id="c-wait" type="button">Join the waitlist</button></div>';
+          document.getElementById('c-wait').addEventListener('click',function(){
+            fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'waitlist',id:it.id,item:it.name,name:v.name,phone:v.phone,email:v.email})}).catch(function(){});
+            notify({kind:'Waitlist',item:it.name,price:money(it.price),name:v.name,phone:v.phone,email:v.email});
+            box.innerHTML='<button class="x" type="button" aria-label="Close">×</button><h3>You\u2019re on the waitlist.</h3><p>If <b>'+esc(it.name)+'</b> opens up, we\u2019ll text you at '+esc(v.phone)+'.</p>';
+          });
+          return;
+        }
+        btn.disabled=false; btn.textContent='Claim it for '+money(it.price); err.textContent=x.d.error||'Something went wrong. Please try again.';
+      }).catch(function(){btn.disabled=false; btn.textContent='Claim it for '+money(it.price); err.textContent='Could not reach the sale. Text '+state.textName+' at '+state.textPhone+'.';});
+    });
+    document.getElementById('c-name').focus();
+  }
   function openDialog(it,mode){
+    if(mode==='claim' && apiOK){ claimDialog(it); return; }
     var root=document.getElementById('dlg-root');
     var title = mode==='claim' ? 'Claim it: '+it.name : mode==='ask' ? 'Ask about: '+it.name : 'Make an offer: '+it.name;
     var intro = mode==='claim' ? 'Paying cash at pickup? Send '+state.textName+' this text and it’s held for you.' : mode==='ask' ? 'Measurements, condition, when you can see it: type the question and it goes to '+state.textName+' as a text.' : 'Tell '+state.textName+' your number. He answers every offer, usually within a few hours.';
@@ -382,10 +437,10 @@ body.owner-mode .card .own{display:flex}
     var im = e.target.closest('img[data-lb]');
     if(im){var it=find(im.getAttribute('data-lb'));document.getElementById('lb-root').innerHTML='<div class="lb" role="dialog" aria-label="'+esc(it.name)+'"><button class="x" type="button" aria-label="Close">×</button><img src="'+esc(im.src)+'" alt="'+esc(it.name)+'"><div class="cap">'+esc(it.name)+' &middot; '+money(it.price)+'</div></div>';return;}
     if(e.target.closest('.lb')){ if(!e.target.closest('.lb img')) document.getElementById('lb-root').innerHTML=''; return;}
-    var cl = e.target.closest('[data-claim]'); if(cl){openDialog(find(cl.getAttribute('data-claim')),'claim');return;}
+    var cl = e.target.closest('[data-claim]'); if(cl){e.preventDefault();openDialog(find(cl.getAttribute('data-claim')),'claim');return;}
     var of = e.target.closest('[data-offer]'); if(of){openDialog(find(of.getAttribute('data-offer')),'offer');return;}
     var ak = e.target.closest('[data-ask]'); if(ak){openDialog(find(ak.getAttribute('data-ask')),'ask');return;}
-    if(e.target.closest('.dlg .x') || (e.target.classList && e.target.classList.contains('dlg'))){document.getElementById('dlg-root').innerHTML='';return;}
+    if(e.target.closest('.dlg .x') || (e.target.classList && e.target.classList.contains('dlg'))){document.getElementById('dlg-root').innerHTML='';if(needRender){needRender=false;render();}return;}
     var cp = e.target.closest('[data-copy]'); if(cp){copyText(cp.getAttribute('data-copy'));return;}
     var rm = e.target.closest('[data-own="remove"]');
     if(rm){var id=rm.getAttribute('data-id');state.items=state.items.filter(function(i){return i.id!==id;});render();toast('Removed. Save to publish.');return;}
@@ -396,7 +451,7 @@ body.owner-mode .card .own{display:flex}
     if(el.getAttribute('data-own')==='status'){it.status=el.value;render();}
     if(el.getAttribute('data-own')==='price'){it.price=Number(el.value)||it.price;}
   });
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.getElementById('lb-root').innerHTML='';document.getElementById('dlg-root').innerHTML='';}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.getElementById('lb-root').innerHTML='';document.getElementById('dlg-root').innerHTML='';if(needRender){needRender=false;render();}}});
 
   function buildDocument(){
     var css = document.getElementById('css').textContent;
@@ -429,6 +484,7 @@ body.owner-mode .card .own{display:flex}
   });
 
   render();
+  fetch(API,{cache:'no-store'}).then(function(r){if(!r.ok) throw 0; return r.json();}).then(function(d){apiOK=true; applyClaims(d.claimed||[]);}).catch(function(){});
 
   if(window.claude && window.claude.use){
     Promise.all([claude.use('user'),claude.use('artifact'),claude.use('assets')]).then(function(r){
