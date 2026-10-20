@@ -62,7 +62,7 @@ export async function handle(req, claims, waitlist, adminKey) {
 export default async (req) => {
   const claims = getStore({ name: "sale-claims", consistency: "strong" });
   const waitlist = getStore({ name: "sale-waitlist", consistency: "strong" });
-  const adminKey = globalThis.Netlify?.env?.get("SALE_KEY") || "";
+  const adminKey = globalThis.Netlify?.env?.get("ADMIN_PHRASE") || globalThis.Netlify?.env?.get("SALE_KEY") || "";
   return handle(req, claims, waitlist, adminKey);
 };
 

@@ -33,7 +33,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
 <div class="wrap">
   <h1>RSVP List</h1>
   <p class="sub">Private page for Brian and Erica. Every RSVP from the invitation lands here automatically.</p>
-  <div class="keybox"><label for="k" style="position:absolute;left:-9999px">Private key</label><input id="k" type="password" placeholder="Private key (SALE_KEY)" autocomplete="current-password"><button id="go" type="button">Show RSVPs</button></div>
+  <div class="keybox"><label for="k" style="position:absolute;left:-9999px">Private key</label><input id="k" type="password" placeholder="Your private phrase" autocomplete="current-password"><button id="go" type="button">Show RSVPs</button></div>
   <p id="msg" role="status"></p>
   <div id="out" hidden>
     <div class="tiles">
@@ -62,7 +62,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
   function load(){
     msg.textContent='Loading...';
     fetch('/api/rsvp?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(d){
-      if(!d.rsvps){msg.textContent='That key did not work. Check the SALE_KEY value in Netlify.';return}
+      if(!d.rsvps){msg.textContent='That key did not work. Check the ADMIN_PHRASE value in Netlify.';return}
       try{localStorage.setItem('rsvpkey',k.value.trim())}catch(e){}
       data=d;msg.textContent='Updated '+new Date().toLocaleTimeString();
       document.getElementById('out').hidden=false;

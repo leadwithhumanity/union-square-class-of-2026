@@ -47,7 +47,7 @@ export async function handle(req, store, adminKey) {
 
 export default async (req) => {
   const store = getStore({ name: "rsvps", consistency: "strong" });
-  const adminKey = globalThis.Netlify?.env?.get("SALE_KEY") || "";
+  const adminKey = globalThis.Netlify?.env?.get("ADMIN_PHRASE") || globalThis.Netlify?.env?.get("SALE_KEY") || "";
   return handle(req, store, adminKey);
 };
 
