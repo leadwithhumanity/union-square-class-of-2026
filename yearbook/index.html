@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/photos/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..800;1,6..12,400..700&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="yearbook.css">
 <script>try{if("scrollRestoration" in history)history.scrollRestoration="manual";if(!location.hash){var t=function(){window.scrollTo(0,0)};t();addEventListener("DOMContentLoaded",t);addEventListener("load",t);addEventListener("pageshow",t)}}catch(e){}</script>
 <style>
@@ -32,21 +32,21 @@
 .portrait figcaption{font-family:var(--hand);font-size:clamp(1.25rem,4.6vw,1.6rem);white-space:nowrap;color:var(--ink);line-height:1.1;margin-top:8px}
 .cover .kicker{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:1.05rem;color:var(--bg);text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .cover .title,.cover .motto{text-shadow:0 2px 18px rgba(0,0,0,.45)}
-.cover .title{font-family:var(--display);font-weight:800;line-height:.9;letter-spacing:-.02em;font-size:clamp(3.2rem,10vw,7.5rem);margin-top:10px}
+.cover .title{font-family:var(--display);font-weight:900;line-height:.84;letter-spacing:0;text-transform:uppercase;font-size:clamp(3.6rem,12vw,9rem);margin-top:10px}
 .cover .title .yr{color:var(--gold)}
-.cover .motto{font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.25;margin:18px 0 0;max-width:32ch}
+.cover .motto{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:clamp(1.15rem,2.3vw,1.7rem);line-height:1.15;margin:16px 0 0;max-width:34ch}
 .cover .flight.haiku{max-width:none;margin-top:12px;line-height:1.25}
 .cover .flight.haiku+.flight.haiku{margin-top:10px}
 .cover .flight{font-family:var(--hand);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.3rem);color:var(--gold);margin:14px auto 0;max-width:34ch;line-height:1.15;text-shadow:0 1px 3px rgba(0,0,0,.85),0 2px 18px rgba(0,0,0,.7)}
 .why1{max-width:46ch;margin:18px auto 0;font-size:1.1rem;color:rgba(250,244,234,.92);text-shadow:0 2px 12px rgba(0,0,0,.5)}
-.evt.shop{grid-column:1/-1}
+.evt.shop{grid-column:1/-1;border-top-color:var(--gold)}
 .kbr{display:none}@media (max-width:560px){.kbr{display:inline}.kdot{display:none}}
 .evt .soak{display:block;margin-top:4px;font-size:.82rem;line-height:1.35;opacity:.8}
 .why1,.evt span,.cover .motto{text-wrap:pretty}
 .evs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;width:min(620px,100%)}
-.evt{display:flex;flex-direction:column;gap:4px;background:rgba(250,244,234,.95);color:var(--ink);text-decoration:none;border-radius:14px;padding:16px 18px;text-align:left;box-shadow:var(--shadow)}
-.evt b{font-family:var(--display);color:var(--maple);font-size:.95rem}
-.evt .nm{font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1.1}
+.evt{display:flex;flex-direction:column;gap:4px;background:#fff;color:var(--ink);text-decoration:none;border-radius:3px;padding:16px 18px;text-align:left;box-shadow:var(--shadow);border-top:6px solid var(--maple)}
+.evt b{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--maple);font-size:1rem}
+.evt .nm{font-family:var(--display);font-weight:900;font-size:2rem;line-height:1;text-transform:uppercase}
 .evt span{font-size:.98rem}
 .evt:hover{outline:3px solid var(--gold)}
 .addr{margin:14px 0 0;color:rgba(250,244,234,.9);font-weight:600;text-shadow:0 2px 10px rgba(0,0,0,.5)}
@@ -54,15 +54,16 @@
 .cover .ctas .btn{margin-top:0}
 .ghost2{background:transparent;color:var(--bg);box-shadow:inset 0 0 0 2px var(--bg)}
 @media (max-width:560px){.evs{grid-template-columns:1fr}}
-.cover .open{margin-top:30px;background:var(--bg);color:var(--ink)}
-.cover .open:hover{background:var(--gold)}
-.band{background:var(--maple);color:var(--bg);padding:26px 0;font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,2vw,1.35rem)}
+.cover .open{margin-top:30px;background:var(--gold);color:var(--ink);box-shadow:0 3px 0 #9a6d0c}
+.cover .open:hover{background:#f0b532}
+.band{background:var(--maple);color:#fff;padding:22px 0;font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:.06em;font-size:clamp(1.15rem,2.2vw,1.6rem);border-top:4px solid var(--gold);border-bottom:4px solid var(--gold)}
 .band .wrap{display:flex;flex-wrap:wrap;gap:10px 40px;justify-content:space-between}
+@media (max-width:560px){.band .wrap{justify-content:center;gap:8px 22px}}
 </style>
 
 </head>
 <body class="pg-index">
-<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html" aria-current=page>Cover</a><a href="contents.html">Contents</a><a href="place.html">The Place</a><a href="celebrate.html">Celebrate With Us</a><a href="history.html">Class History</a><a href="tour.html">Campus Tour</a><a href="family.html">Friends and Family</a><a href="classphotos.html">Class Photos</a><a href="exchange.html">Exchange Students</a><a href="news.html">In the News</a><a href="honor.html">Honor Roll</a><a href="give.html">Give</a><a href="beachwood.html">Beachwood</a><a href="after.html">After Graduation</a><a href="sign.html">Autographs</a><a class="sale" href="https://union-square-class-of-2026.netlify.app/">Estate Sale</a></nav></div></header>
+<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html" aria-current=page><span class="n">1</span>Cover</a><a href="contents.html"><span class="n">2</span>Contents</a><a href="place.html"><span class="n">4</span>The Place</a><a href="celebrate.html"><span class="n">6</span>Celebrate With Us</a><a href="history.html"><span class="n">8</span>Class History</a><a href="tour.html"><span class="n">10</span>Campus Tour</a><a href="family.html"><span class="n">12</span>Friends and Family</a><a href="classphotos.html"><span class="n">14</span>Class Photos</a><a href="exchange.html"><span class="n">16</span>Exchange Students</a><a href="news.html"><span class="n">18</span>In the News</a><a href="honor.html"><span class="n">20</span>Honor Roll</a><a href="give.html"><span class="n">22</span>Give</a><a href="beachwood.html"><span class="n">24</span>Beachwood</a><a href="after.html"><span class="n">26</span>After Graduation</a><a href="sign.html"><span class="n">28</span>Autographs</a><a class="sale" href="https://union-square-class-of-2026.netlify.app/">Estate Sale</a></nav></div></header>
 
 <section class="cover">
   <img class="bg" src="img/z224_arch.jpg" alt="" fetchpriority="high">
@@ -84,6 +85,6 @@
 </section>
 <div class="band"><div class="wrap"><span>Gathering</span><span>Feasting</span><span>Tributes</span><span>Singing Bowls</span><span>Toasts</span></div></div>
 
-<footer class="colophon"><div class="wrap"><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="https://union-square-class-of-2026.netlify.app/">The estate sale</a><a class="next" href="contents.html">Next: Table of Contents &rarr;</a></div></footer>
+<footer class="colophon"><div class="wrap"><span class="pageno">1</span><span class="runfoot">Union Square, Class of 2026</span><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="https://union-square-class-of-2026.netlify.app/">The estate sale</a><a class="next" href="contents.html">Next: Table of Contents &rarr;</a></div></footer>
 </body>
 </html>

@@ -1,9 +1,9 @@
 /* Union Square Class of 2026: yearbook pages. Shared tokens with the sale catalog. */
 :root{
-  --bg:#FAF4EA;--paper:#FFFFFF;--ink:#2C221D;--muted:#7A6A5F;--line:#E9DCCB;
-  --maple:#B5402C;--gold:#D89E2F;--accent:#E8732A;--sky:#D9E5F8;--navy:#1F2A44;
-  --display:"Bricolage Grotesque",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif;--hand:"Caveat",cursive;
-  --shadow:0 1px 2px rgba(44,34,29,.06),0 14px 34px -18px rgba(44,34,29,.28);
+  --bg:#FAF9F6;--paper:#FFFFFF;--ink:#151515;--muted:#5C5752;--line:#E2DED7;
+  --maple:#7D1D2C;--gold:#E3A21A;--accent:#E3A21A;--sky:#F7ECD2;--navy:#4A111B;
+  --display:"Big Shoulders Display","Arial Narrow",sans-serif;--body:"Nunito Sans",system-ui,sans-serif;--hand:"Caveat",cursive;
+  --shadow:0 2px 3px rgba(0,0,0,.08),0 12px 24px -12px rgba(0,0,0,.35);
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -11,42 +11,49 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;}
 img{max-width:100%;display:block}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--display);line-height:.98;margin:0;letter-spacing:0;font-weight:800}
 p{margin:0 0 1em}
 .wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* spine: the thin strip that runs across every page */
-.spine{position:sticky;top:0;z-index:50;background:var(--ink);color:var(--bg);font-family:var(--display);font-size:15px}
-.spine .wrap{display:flex;align-items:center;gap:22px;height:50px}
-.spine .mark{font-weight:800;white-space:nowrap;text-decoration:none;letter-spacing:.01em}
-.spine .mark span{color:var(--gold)}
-.spine nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+/* spine: maroon binding with gold foil, numbered like the book's sections */
+.spine{position:sticky;top:0;z-index:50;background:var(--maple);color:#fff;font-family:var(--display);font-size:16px;border-bottom:4px solid var(--gold);box-shadow:inset 0 6px 0 rgba(255,255,255,.06)}
+.spine .wrap{display:flex;align-items:center;gap:22px;height:52px}
+.spine .mark{font-weight:900;white-space:nowrap;text-decoration:none;text-transform:uppercase;letter-spacing:.04em;font-size:18px;color:var(--gold)}
+.spine .mark span{color:#fff}
+.spine nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto;counter-reset:pg}
 .spine nav::-webkit-scrollbar{display:none}
-.spine nav a{text-decoration:none;padding:6px 10px;border-radius:999px;white-space:nowrap;opacity:.78;font-weight:600}
+.spine nav a{text-decoration:none;padding:6px 9px;white-space:nowrap;opacity:.85;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-bottom:3px solid transparent}
+.spine nav a .n{color:var(--gold);margin-right:5px;font-weight:900}
 .spine nav a:hover{opacity:1}
-.spine nav a[aria-current=page]{background:var(--bg);color:var(--ink);opacity:1}
+.spine nav a[aria-current=page]{opacity:1;border-bottom-color:var(--gold)}
 .spine nav a.sale{color:var(--gold);opacity:1}
 
-/* page headers */
-.pagehead{padding:56px 0 24px}
-.pagehead h1{font-size:clamp(2.6rem,7vw,5.4rem);font-weight:800}
-.pagehead .sub{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:62ch;margin-top:14px;color:var(--muted)}
-.folio{font-family:var(--display);font-weight:600;color:var(--maple);font-size:.95rem;margin-bottom:6px}
+/* page headers: giant condensed section title with a script accent, 2000s yearbook style */
+.pagehead{padding:52px 0 24px}
+.pagehead h1{font-size:clamp(3.2rem,10vw,7.5rem);font-weight:900;text-transform:uppercase;letter-spacing:-.005em;line-height:.86}
+.pagehead .sub{font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:62ch;margin-top:16px;color:var(--muted)}
+.folio{font-family:var(--hand);font-weight:700;color:var(--maple);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1;margin-bottom:2px;transform:rotate(-3deg);transform-origin:left bottom;display:inline-block}
+
+/* printed photos: white border and a drop shadow, like a glossy page */
+figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow)}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:12px 20px;font-size:1rem;cursor:pointer;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:var(--maple);color:#fff;border:0;border-radius:4px;padding:12px 20px;font-size:1.05rem;cursor:pointer;text-decoration:none;box-shadow:0 3px 0 var(--navy)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--navy)}
 .btn.maple{background:var(--maple)}
 .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
 
-/* footer */
-.colophon{margin-top:80px;padding:34px 0 60px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
-.colophon .wrap{display:flex;flex-wrap:wrap;gap:14px 34px;align-items:baseline}
+/* footer: running foot with the page number, like the bottom of a printed page */
+.colophon{margin-top:80px;padding:22px 0 50px;border-top:4px solid var(--maple);font-size:.95rem;color:var(--muted)}
+.colophon .wrap{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:baseline}
+.colophon .pageno{font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;color:var(--maple)}
+.colophon .runfoot{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink)}
 .colophon a{color:var(--ink)}
 .colophon .colo-logo{width:64px;height:auto;align-self:center}
-.colophon .next{margin-left:auto;font-family:var(--display);font-weight:700;color:var(--ink);text-decoration:none;font-size:1.05rem}
-.colophon .next:hover{color:var(--maple)}
+.colophon .next{margin-left:auto;font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--maple);text-decoration:none;font-size:1.1rem}
+.colophon .next:hover{color:var(--ink)}
 
 @media (max-width:700px){
   body{font-size:16px}
