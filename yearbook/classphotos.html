@@ -87,11 +87,19 @@ dialog.lb::backdrop{background:rgba(28,21,18,.85)}
 .rv mark{background:var(--gold);color:var(--ink);border-radius:3px;padding:0 2px}
 .more{text-align:center;padding:20px 0}
 .vlog{margin-top:60px;background:var(--ink);color:var(--bg);padding:50px 0}
-.vlog .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:34px;align-items:center}
-.vlog h2{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:800;margin-bottom:12px}
-.vlog .frame{aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
-.vlog iframe{width:100%;height:100%;border:0}
-@media (max-width:900px){.wall{columns:2}.vlog .wrap{grid-template-columns:1fr}}
+.vlog .vhead{max-width:62ch;margin-bottom:24px}
+.vlog h2{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:800;margin-bottom:10px}
+.ytgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.yt{margin:0}
+.yt .ytplay,.yt iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;overflow:hidden;background:#000;padding:0;position:relative;cursor:pointer}
+.yt .ytplay img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}
+.yt .pb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:var(--gold);color:var(--ink);font-size:30px;display:grid;place-items:center;padding-left:6px;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.yt .ytplay:hover .pb{transform:translate(-50%,-50%) scale(1.08)}
+.yt figcaption{margin-top:12px}
+.yt h3{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1.2;margin-bottom:4px}
+.yt p{color:rgba(250,244,234,.85);font-size:1rem}
+.yt a{color:var(--gold);font-family:var(--display);font-weight:700;display:inline-block;margin-top:6px}
+@media (max-width:900px){.wall{columns:2}.ytgrid{grid-template-columns:1fr}}
 @media (max-width:560px){.wall{columns:1}}
 
 .merged.pagehead{padding-top:70px;border-top:6px solid var(--maple);margin-top:60px}
@@ -153,8 +161,7 @@ const m=location.hash.match(/#p([0-9]+)/);if(m)open(+m[1]-1);
 <div class="stats"><div class="stat"><b>681</b><span>written reviews</span></div><div class="stat"><b>107</b><span>mention the rooftop</span></div><div class="stat"><b>147</b><span>say "recommend"</span></div><div class="stat"><b>122</b><span>say it felt like home</span></div><div class="stat"><b>63</b><span>mention the school</span></div><div class="stat"><b>92</b><span>mention the snacks</span></div></div></div></section>
 <div class="tools"><div class="wrap"><input id="q" type="search" placeholder="Search the reviews: hot tub, snacks, your name" aria-label="Search reviews"><button class="btn ghost" id="shuffle" type="button">Shuffle</button><span class="n" id="n"></span></div></div>
 <section class="wrap"><div class="wall" id="rwall"></div><div class="more"><button class="btn" id="more" type="button">Show more</button></div></section>
-<section class="vlog"><div class="wrap"><div><div class="folio" style="color:var(--gold)">Guest footage</div><h2>"We were met by two strangers, Erica and Brian."</h2><p>A guest's vlog of a surprise birthday trip to Grand Rapids, August 2016, hand-drawn Union High title card and all.</p></div>
-<div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/joO1Itae0P8" title="August 30, 2016, a guest's vlog of the Loft" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div></section>
+<section class="vlog" id="videos"><div class="wrap"><div class="vhead"><div class="folio" style="color:var(--gold)">On screen</div><h2>The Loft on YouTube</h2><p>Two videos made in our home: a song sung right here in the loft, and a guest&rsquo;s vlog of a surprise birthday trip.</p></div><div class="ytgrid"><figure class="yt"><button class="ytplay" type="button" data-id="cRxFeQx32S8" aria-label="Play: I Wish I Would've Fished More"><img src="img/yt_song.jpg" alt="" loading="lazy"><span class="pb" aria-hidden="true">&#9654;</span></button><figcaption><h3>&ldquo;I Wish I Would&rsquo;ve Fished More&rdquo;</h3><p>Wild Life Crush, sung and filmed in our loft. December 2015.</p><a href="https://www.youtube.com/watch?v=cRxFeQx32S8" target="_blank" rel="noopener">Watch on YouTube &rarr;</a></figcaption></figure><figure class="yt"><button class="ytplay" type="button" data-id="joO1Itae0P8" aria-label="Play: guest vlog, August 2016"><img src="img/yt_vlog.jpg" alt="" loading="lazy"><span class="pb" aria-hidden="true">&#9654;</span></button><figcaption><h3>&ldquo;We were met by two strangers, Erica and Brian.&rdquo;</h3><p>A guest&rsquo;s vlog of a surprise birthday trip to Grand Rapids, August 2016, hand-drawn Union High title card and all.</p><a href="https://www.youtube.com/watch?v=joO1Itae0P8" target="_blank" rel="noopener">Watch on YouTube &rarr;</a></figcaption></figure></div></div></section><script>document.querySelectorAll(".ytplay").forEach(function(b){b.addEventListener("click",function(){var f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+b.dataset.id+"?autoplay=1&rel=0";f.title=b.getAttribute("aria-label");f.allow="autoplay; encrypted-media; picture-in-picture";f.allowFullscreen=true;b.replaceWith(f)})})</script>
 <script>
 (async()=>{
 const R=await (await fetch('reviews.json')).json();
