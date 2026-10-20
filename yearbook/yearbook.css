@@ -62,3 +62,7 @@ figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow
   .spine .mark{font-size:14px}
   .pagehead{padding:34px 0 16px}
 }
+
+/* printed-page corners: cards and boxes get crisp corners, like pages pasted in a yearbook */
+.ev2,.feature,.org,.card,.day,.stat,.rv,.o,.plaque,.form,.lined,.why,.box,.evt,.qr,.twentyfive,.toc2 a,.toc2 li,.done,.half,.ev2 .body{border-radius:3px!important}
+.toc2 img{border-radius:0!important}
