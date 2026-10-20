@@ -31,9 +31,11 @@ export async function handle(req, store, adminKey) {
     const name = clean(b.name, 80), cell = clean(b.cell, 30), email = clean(b.email, 120);
     if (name.length < 2) return json({ error: "Please add your name." }, 400);
     const digits = cell.replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
-    if (digits.length !== 10) return json({ error: "Please add your cell number with the area code." }, 400);
     const allowed = ["Fri Oct 23", "Sat Oct 24", "Cannot come"];
     const events = (Array.isArray(b.events) ? b.events : [b.events]).filter((e) => allowed.includes(e));
+    const attending = events.includes("Fri Oct 23") || events.includes("Sat Oct 24");
+    if (attending && digits.length !== 10) return json({ error: "Please add your cell number with the area code." }, 400);
+    if (!attending && digits.length && digits.length !== 10) return json({ error: "Please include the area code with your cell number." }, 400);
     const rec = { name, cell: digits, email, events, text_ok: Boolean(b.text_ok), keep_in_touch: Boolean(b.keep_in_touch), adults: num(b.adults), kids: num(b.kids), at: new Date().toISOString() };
     const id = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
     await store.setJSON(id, rec);
