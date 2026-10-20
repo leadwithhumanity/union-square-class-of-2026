@@ -126,7 +126,8 @@
 
 </head>
 <body class="pg-index">
-<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><nav aria-label="Yearbook sections"><a href="index.html" aria-current=page><span class="n">1</span>You're Invited</a><a href="history.html"><span class="n">2</span>Class History</a><a href="classphotos.html"><span class="n">4</span>Class Photos</a><a href="honor.html"><span class="n">6</span>Honor Roll</a><a href="sign.html"><span class="n">8</span>Guestbook</a><a class="sale" href="https://union-square-class-of-2026.netlify.app/">Estate Sale</a></nav></div></header>
+<header class="spine"><div class="wrap"><a class="mark" href="index.html">Union Square <span>Class of 2026</span></a><div class="tabs"><button class="arr l" type="button" aria-label="Scroll sections left" hidden>&lsaquo;</button><nav aria-label="Yearbook sections"><a href="index.html" aria-current=page><span class="n">1</span>You're Invited</a><a href="history.html"><span class="n">2</span>Class History</a><a href="classphotos.html"><span class="n">4</span>Class Photos</a><a href="honor.html"><span class="n">6</span>Honor Roll</a><a href="sign.html"><span class="n">8</span>Guestbook</a><a class="sale" href="https://union-square-class-of-2026.netlify.app/">Estate Sale</a></nav><button class="arr r" type="button" aria-label="Scroll sections right" hidden>&rsaquo;</button></div></div></header>
+<script>(function(){var n=document.currentScript.previousElementSibling.querySelector('nav'),l=n.previousElementSibling,r=n.nextElementSibling;function u(){var m=n.scrollWidth-n.clientWidth;l.hidden=n.scrollLeft<4;r.hidden=n.scrollLeft>m-4}var c=n.querySelector('[aria-current]');if(c)n.scrollLeft=c.offsetLeft-n.offsetLeft-(n.clientWidth-c.offsetWidth)/2;l.onclick=function(){n.scrollBy({left:-160,behavior:'smooth'})};r.onclick=function(){n.scrollBy({left:160,behavior:'smooth'})};n.addEventListener('scroll',u,{passive:true});addEventListener('resize',u);addEventListener('load',function(){if(c)n.scrollLeft=c.offsetLeft-n.offsetLeft-(n.clientWidth-c.offsetWidth)/2;u()});u()})();</script>
 
 <section class="cover">
   <img class="bg" src="img/z224_arch.jpg" alt="" fetchpriority="high">
@@ -170,6 +171,7 @@
 </form></section>
 
 
+<nav class="pager wrap" aria-label="Turn the page"><span></span><a class="pg-next" href="history.html"><small>Next page &rarr;</small><span>2 Class History</span></a></nav>
 <footer class="colophon"><div class="wrap"><span class="pageno">1</span><span class="runfoot">Union Square, Class of 2026</span><span>The Loft at Union Square, 600 Broadway Ave NW, Grand Rapids. The old Union High School gymnasium, 2006 to 2026.</span><a href="https://union-square-class-of-2026.netlify.app/">The estate sale</a><a class="next" href="history.html">Next: Class History &rarr;</a></div></footer>
 </body>
 </html>

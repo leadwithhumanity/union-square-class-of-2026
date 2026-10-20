@@ -75,3 +75,21 @@ figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow
 .pg-index .pagehead .bird .b-line,.pg-classphotos .pagehead .bird .b-line,.pg-honor .pagehead .bird .b-line{display:none}
 .pg-index .pagehead .bird,.pg-classphotos .pagehead .bird,.pg-honor .pagehead .bird{filter:drop-shadow(0 0 .7px #FAF4EA) drop-shadow(0 0 .7px #FAF4EA)}
 .pagehead .bird{display:block;width:64px;margin-bottom:10px}
+/* Section tabs: arrows when they don't fit, and page-turn buttons */
+.spine .tabs{display:flex;align-items:center;min-width:0;margin-left:auto;position:relative}
+.spine .tabs nav{margin-left:0}
+.spine .arr{flex:none;width:30px;height:34px;border:0;border-radius:6px;background:rgba(255,255,255,.16);color:#fff;font:900 24px/1 var(--display);cursor:pointer;padding:0}
+.spine .arr:hover{background:rgba(255,255,255,.3)}
+.spine .arr[hidden]{display:none}
+.spine .arr.l{margin-right:4px}.spine .arr.r{margin-left:4px}
+.pager{display:flex;justify-content:space-between;gap:14px;margin-top:56px;margin-bottom:28px}
+.pager a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:4px;padding:14px 20px;box-shadow:0 4px 0 var(--ink);min-width:0;max-width:48%}
+.pager a small{font-family:var(--display);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--maple)}
+.pager a span{font-family:var(--display);font-weight:900;font-size:1.3rem;text-transform:uppercase;line-height:1.1}
+.pager .pg-next{margin-left:auto;text-align:right;background:var(--gold);border-color:var(--ink)}
+.pager .pg-next small{color:var(--ink)}
+.pager a:hover{transform:translateY(-2px)}
+.pager a:active{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
+@media (max-width:520px){.pager a{padding:12px 14px}.pager a span{font-size:1.05rem}}
+@media print{.pager,.spine .arr{display:none}}
+@media (max-width:700px){.spine .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:2px;row-gap:2px}.spine .tabs{width:100%;margin-left:0}.spine .tabs nav{flex:1}}
