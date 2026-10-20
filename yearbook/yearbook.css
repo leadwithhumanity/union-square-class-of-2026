@@ -69,3 +69,5 @@ figure:not(.portrait)>img,.ev2>img{border:6px solid #fff;box-shadow:var(--shadow
 
 /* legibility: heavy wide headings read better than condensed */
 .spine .mark{font-size:16px}
+/* American Redstart icon: outline it on the dark and orange page headers */
+.pg-index .pagehead .bird,.pg-celebrate .pagehead .bird,.pg-classphotos .pagehead .bird{--bird-branch:#FAF4EA;filter:drop-shadow(0 0 .7px #FAF4EA) drop-shadow(0 0 .7px #FAF4EA)}
