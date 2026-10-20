@@ -12,7 +12,8 @@ const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
 const clean = (s, n) => String(s || "").replace(/[\u0000-\u0008\u000b-\u001f<>]/g, " ").trim().slice(0, n);
 const ID = /^[a-z0-9-]{6,40}$/i;
-const pub = ({ id, prompt, message, name, from, at }) => ({ id, prompt, message, name, from, at });
+const MID = /^[a-z0-9]{6,12}-[a-z0-9]{4,8}$/;
+const pub = ({ id, prompt, message, name, from, at, media }) => ({ id, prompt, message, name, from, at, media: media || [] });
 
 export async function handle(req, store, adminKey) {
   const url = new URL(req.url);
@@ -46,12 +47,13 @@ export async function handle(req, store, adminKey) {
     try { b = await req.json(); } catch { return json({ error: "Bad request" }, 400); }
     if (b["bot-field"] || b.website) return json({ ok: true }); // honeypot
     const prompt = PROMPTS.includes(b.prompt) ? b.prompt : PROMPTS[0];
-    const message = clean(b.message, 900), name = clean(b.name, 80), from = clean(b.from, 80), email = clean(b.email, 120);
-    if (message.length < 2) return json({ error: "Please write a note." }, 400);
+    const message = clean(b.message, 8000), name = clean(b.name, 80), from = clean(b.from, 80), email = clean(b.email, 120);
+    if (message.length < 2 && !(Array.isArray(b.media) && b.media.length)) return json({ error: "Please write a note." }, 400);
     if (name.length < 2) return json({ error: "Please add your name." }, 400);
     const at = new Date().toISOString();
     const id = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
-    const note = { prompt, message, name, from, email, at, hidden: false };
+    const media = (Array.isArray(b.media) ? b.media : []).filter((m) => MID.test(String(m))).slice(0, 8);
+    const note = { prompt, message, name, from, email, at, media, hidden: false };
     await store.setJSON(id, note);
     return json({ ok: true, note: pub({ id, ...note }) });
   }

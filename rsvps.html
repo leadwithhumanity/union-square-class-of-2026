@@ -50,6 +50,12 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
     </div>
     <div class="acts"><button id="cp" type="button">Copy all cell numbers for a group text</button><button id="csv" class="ghost" type="button">Copy as spreadsheet rows</button></div>
     <div class="scroll"><table><thead><tr><th>Name</th><th>Cell</th><th>Email</th><th>Days</th><th>Adults</th><th>Kids</th><th>Text OK</th><th>Newsletter</th><th>When</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <h2 style="margin:34px 0 6px">Shared photos and videos</h2>
+    <p class="sub" id="mcount">Tap Hide to take something off the site. You can show it again later.</p>
+    <div id="media" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
+    <h2 style="margin:34px 0 6px">Yearbook notes</h2>
+    <p class="sub">Hide a test note or anything you would rather not show.</p>
+    <div id="notes" style="display:grid;gap:10px"></div>
   </div>
 </div>
 <script>
@@ -71,9 +77,24 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
       document.getElementById('t-s').textContent=d.saturday.adults+' + '+d.saturday.kids;
       document.getElementById('t-c').textContent=d.rsvps.filter(function(r){return r.events.length===1&&r.events[0]==='Cannot come'}).length;
       document.getElementById('rows').innerHTML=d.rsvps.map(function(r){return '<tr><td>'+esc(r.name)+'</td><td>'+esc(fmt(r.cell))+'</td><td>'+esc(r.email)+'</td><td>'+esc(days(r))+'</td><td class="num">'+r.adults+'</td><td class="num">'+r.kids+'</td><td>'+(r.text_ok?'Yes':'')+'</td><td>'+(r.keep_in_touch?'Yes':'')+'</td><td>'+esc(new Date(r.at).toLocaleString())+'</td></tr>'}).join('');
-      fetch('/api/hit?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(h){if(!h.invite)return;document.getElementById('h-i').textContent=h.invite.people;document.getElementById('h-io').textContent=h.invite.opens;document.getElementById('h-s').textContent=h.sale.people;document.getElementById('h-y').textContent=h.yearbook.people}).catch(function(){});
+      media();fetch('/api/hit?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(h){if(!h.invite)return;document.getElementById('h-i').textContent=h.invite.people;document.getElementById('h-io').textContent=h.invite.opens;document.getElementById('h-s').textContent=h.sale.people;document.getElementById('h-y').textContent=h.yearbook.people}).catch(function(){});
     }).catch(function(){msg.textContent='Could not reach the site. Try again in a minute.'});
   }
+  function media(){
+    var key=encodeURIComponent(k.value.trim()),box=document.getElementById('media');
+    fetch('/api/media?key='+key).then(function(r){return r.json()}).then(function(d){
+      var it=d.items||[];document.getElementById('mcount').textContent=it.length+' shared so far. Tap Hide to take something off the site; you can show it again later.';
+      box.innerHTML=it.map(function(x){var u='/api/media?file='+x.id+(x.thumb?'&thumb=1':'');return '<div class="tile" style="padding:8px'+(x.hidden?';opacity:.45':'')+'">'+(x.hidden?'<div style="height:110px;display:flex;align-items:center;justify-content:center;background:var(--line);border-radius:8px">Hidden</div>':(x.kind==='vid'&&!x.thumb?'<video src="/api/media?file='+x.id+'#t=0.1" preload="metadata" style="width:100%;height:110px;object-fit:cover;border-radius:8px" muted></video>':'<img src="'+u+'" alt="" style="width:100%;height:110px;object-fit:cover;border-radius:8px">'))+'<div style="font-size:.85rem;margin:6px 0">'+esc(x.name)+(x.kind==='vid'?' (video)':'')+'</div><button type="button" class="ghost" data-mid="'+x.id+'" data-h="'+(x.hidden?1:0)+'" style="padding:6px 10px;width:100%">'+(x.hidden?'Show again':'Hide')+'</button></div>'}).join('');
+    }).catch(function(){});
+    fetch('/api/guestbook?key='+key).then(function(r){return r.json()}).then(function(d){
+      document.getElementById('notes').innerHTML=(d.notes||[]).map(function(n){return '<div class="tile" style="display:flex;gap:12px;align-items:flex-start'+(n.hidden?';opacity:.45':'')+'"><div style="flex:1"><b style="font-size:1rem;display:inline">'+esc(n.name)+'</b> <span style="color:var(--muted);font-size:.85rem">'+esc(n.prompt)+'</span><div style="white-space:pre-line;max-height:5.5em;overflow:hidden">'+esc(n.message)+'</div></div>'+(n.hidden?'<span>Hidden</span>':'<button type="button" class="ghost" data-nid="'+n.id+'" style="padding:6px 10px">Hide</button>')+'</div>'}).join('')||'<p class="sub">No notes yet.</p>';
+    }).catch(function(){});
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-mid],button[data-nid]');if(!b)return;var key=encodeURIComponent(k.value.trim());b.disabled=true;
+    var url=b.dataset.mid?'/api/media?key='+key+'&id='+b.dataset.mid:'/api/guestbook?key='+key+'&id='+b.dataset.nid;
+    fetch(url,{method:b.dataset.mid&&b.dataset.h==='1'?'PATCH':'DELETE'}).then(function(){media()});
+  });
   function copy(t,label){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){msg.textContent=label}).catch(function(){window.prompt('Copy this',t)})}
   document.getElementById('go').onclick=load;
   k.addEventListener('keydown',function(e){if(e.key==='Enter')load()});
