@@ -10,15 +10,15 @@
 <meta property="og:image" content="https://union-square-class-of-2026.netlify.app/photos/og.jpg">
 <link rel="icon" href="/photos/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400..800;1,6..12,400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/yearbook/yearbook.css">
 <script>try{if("scrollRestoration" in history)history.scrollRestoration="manual";if(!location.hash){var t=function(){window.scrollTo(0,0)};t();addEventListener("load",t);addEventListener("pageshow",t)}}catch(e){}</script>
 <style>
-.top{background:var(--ink);color:var(--bg);padding:13px 0}
+.top{background:var(--maple);color:#fff;padding:13px 0;border-bottom:4px solid var(--gold)}
 .top .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--display);font-weight:700}
-.top a{color:var(--bg);text-decoration:none}.top a span{color:var(--gold)}
+.top a{color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.03em}.top a span{color:var(--gold)}
 .head{padding:34px 0 10px}
-.head h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,6vw,3.4rem);line-height:1;letter-spacing:-.01em}
+.head h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,8vw,4.6rem);line-height:.88}
 .head p{max-width:60ch;margin-top:12px;color:var(--muted);font-size:1.05rem}
 .head .where{color:var(--ink);font-weight:600}
 .days{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
@@ -86,7 +86,7 @@ function fmt(m){var h=Math.floor(m/60),mm=m%60,ap=h>=12?'pm':'am',h12=h%12||12;r
 function fallback(){var out=[],D=[['2026-10-29','Thursday, Oct 29'],['2026-10-30','Friday, Oct 30']];D.forEach(function(d){for(var m=540;m<1140;m+=30){var hh=String(Math.floor(m/60)).padStart(2,'0'),mm=String(m%60).padStart(2,'0');out.push({id:d[0]+'-'+hh+mm,day:d[1],date:d[0],minutes:m})}});return out}
 function render(){days.innerHTML='';var groups={};slots.forEach(function(s){(groups[s.day]=groups[s.day]||[]).push(s)});
 Object.keys(groups).forEach(function(day){var box=document.createElement('section');box.className='day';var h=document.createElement('h2');h.textContent=day;box.appendChild(h);var g=document.createElement('div');g.className='slots';
-groups[day].forEach(function(s){var b=document.createElement('button');b.type='button';b.className='slot';b.textContent=fmt(s.minutes);var t=taken.has(s.id);b.disabled=t;b.setAttribute('aria-pressed',String(chosen&&chosen.id===s.id));b.setAttribute('aria-label',day+' '+fmt(s.minutes)+(t?', taken':''));
+groups[day].forEach(function(s){var b=document.createElement('button');b.type='button';b.className='slot';b.textContent=fmt(s.minutes);var t=taken.has(s.id);b.disabled=t;b.setAttribute('aria-pressed',String(!!(chosen&&chosen.id===s.id)));b.setAttribute('aria-label',day+' '+fmt(s.minutes)+(t?', taken':''));
 b.onclick=function(){chosen=s;render();form.hidden=false;picked.textContent=s.day+' at '+fmt(s.minutes);err.textContent='';setTimeout(function(){form.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('name').focus({preventScroll:true})},50)};g.appendChild(b)});
 box.appendChild(g);days.appendChild(box)})}
 function load(){return fetch(API,{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){slots=d.slots;taken=new Set(d.taken);offline=false;if(chosen&&taken.has(chosen.id)){chosen=null;form.hidden=true}render()}).catch(function(){slots=fallback();offline=true;render()})}
