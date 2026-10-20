@@ -42,6 +42,12 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
       <div class="tile"><b id="t-s">0</b><span>Saturday: adults + kids</span></div>
       <div class="tile"><b id="t-c">0</b><span>Can't come</span></div>
     </div>
+    <div class="tiles">
+      <div class="tile"><b id="h-i">0</b><span>People who opened the invite</span></div>
+      <div class="tile"><b id="h-io">0</b><span>Total invite opens</span></div>
+      <div class="tile"><b id="h-s">0</b><span>People who opened the estate sale</span></div>
+      <div class="tile"><b id="h-y">0</b><span>People who opened yearbook pages</span></div>
+    </div>
     <div class="acts"><button id="cp" type="button">Copy all cell numbers for a group text</button><button id="csv" class="ghost" type="button">Copy as spreadsheet rows</button></div>
     <div class="scroll"><table><thead><tr><th>Name</th><th>Cell</th><th>Email</th><th>Days</th><th>Adults</th><th>Kids</th><th>Text OK</th><th>Newsletter</th><th>When</th></tr></thead><tbody id="rows"></tbody></table></div>
   </div>
@@ -65,6 +71,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
       document.getElementById('t-s').textContent=d.saturday.adults+' + '+d.saturday.kids;
       document.getElementById('t-c').textContent=d.rsvps.filter(function(r){return r.events.length===1&&r.events[0]==='Cannot come'}).length;
       document.getElementById('rows').innerHTML=d.rsvps.map(function(r){return '<tr><td>'+esc(r.name)+'</td><td>'+esc(fmt(r.cell))+'</td><td>'+esc(r.email)+'</td><td>'+esc(days(r))+'</td><td class="num">'+r.adults+'</td><td class="num">'+r.kids+'</td><td>'+(r.text_ok?'Yes':'')+'</td><td>'+(r.keep_in_touch?'Yes':'')+'</td><td>'+esc(new Date(r.at).toLocaleString())+'</td></tr>'}).join('');
+      fetch('/api/hit?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(h){if(!h.invite)return;document.getElementById('h-i').textContent=h.invite.people;document.getElementById('h-io').textContent=h.invite.opens;document.getElementById('h-s').textContent=h.sale.people;document.getElementById('h-y').textContent=h.yearbook.people}).catch(function(){});
     }).catch(function(){msg.textContent='Could not reach the site. Try again in a minute.'});
   }
   function copy(t,label){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){msg.textContent=label}).catch(function(){window.prompt('Copy this',t)})}
