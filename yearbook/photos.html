@@ -42,6 +42,19 @@
 .sharebox .addph{margin-top:0}
 .sharebox .btn{background:var(--gold);color:var(--ink);justify-content:center;width:100%}
 .sharebox .st{grid-column:1/-1;font-weight:700;min-height:1.4em;margin:4px 0 0;white-space:pre-line}
+.pick2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sharebox .pickbtn{display:flex;margin:0;gap:12px;align-items:center;padding:16px;border-radius:12px;background:var(--bg);color:var(--ink);cursor:pointer;border:3px solid transparent}
+.pickbtn.rec{background:var(--gold)}
+.pickbtn svg{flex:none}
+.pickbtn b{display:block;font-family:var(--display);font-size:1.05rem}
+#shareform{scroll-margin-top:80px}
+.pickbtn small{display:block;font-size:.85rem;line-height:1.35;opacity:.85;margin-top:2px}
+.pickbtn input{position:absolute;width:1px;height:1px;opacity:0}
+.pickbtn:focus-within{border-color:var(--maple)}
+.pickbtn.pulse{animation:pulse 1.2s ease 2}
+@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(232,168,56,.45)}}
+.chosen{margin:0;font-weight:700;min-height:1.2em}
+@media (max-width:700px){.pick2{grid-template-columns:1fr}}
 .morebtn [hidden],.sharebox [hidden]{display:none!important}
 .entry+.nmedia,.nmedia.after{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin:-24px 0 30px}
 .nmedia.after .gm{padding:0;box-shadow:none;background:none;margin:0}.nmedia.after figcaption{display:none}.nmedia.after img,.nmedia.after video{aspect-ratio:1;object-fit:cover}
@@ -62,7 +75,7 @@
   <div><label for="s-name">Your name</label><input type="text" id="s-name" required autocomplete="name"></div>
   <div><label for="s-from">Where you're from (optional)</label><input type="text" id="s-from" autocomplete="address-level2"></div>
   <div class="full"><label for="s-cap">A few words about it (optional)</label><input type="text" id="s-cap" maxlength="300" placeholder="Saturday on the rooftop, summer 2014"></div>
-  <label class="addph full" for="s-files">Choose photos or record a video<small>Pick as many photos as you like, or a video of 20 seconds or less: one second for each of our 20 years. On a phone, tap here and choose Take Video.</small><input type="file" id="s-files" accept="image/*,video/*" multiple></label>
+  <div class="pick2 full"><label class="pickbtn" for="s-files"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Upload photos or a video</b><small>From your camera roll or computer. Pick as many as you like.</small></span><input type="file" id="s-files" accept="image/*,video/*" multiple></label><label class="pickbtn rec" for="s-rec" id="record"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 10.5 22 7v10l-6-3.5z" fill="currentColor"/></svg><span><b>Record a video</b><small>Opens your camera on a phone. 20 seconds for our 20 years.</small></span><input type="file" id="s-rec" accept="video/*" capture="user"></label></div><p class="chosen full" id="s-chosen" aria-live="polite"></p>
   <div class="full"><button class="btn" type="submit" id="s-go">Add to our yearbook</button></div>
   <p class="st" id="s-st" role="status" aria-live="polite"></p>
 </form></div></section>
@@ -74,18 +87,22 @@ USQ.lightbox();
 function draw(){var h='';for(var k=shown;k<Math.min(all.length,shown+PAGE);k++)h+=USQ.tile(all[k]);wall.insertAdjacentHTML('beforeend',h);shown=Math.min(all.length,shown+PAGE);more.hidden=shown>=all.length;cnt.textContent=all.length?(all.length+(all.length===1?' photo or video':' photos and videos')+' shared so far.'):'No photos yet. Be the first to share one.'}
 more.onclick=draw;
 USQ.items().then(function(it){all=it;draw()});
-var f=document.getElementById('shareform'),st=document.getElementById('s-st'),go=document.getElementById('s-go'),fi=document.getElementById('s-files');
+var f=document.getElementById('shareform'),st=document.getElementById('s-st'),go=document.getElementById('s-go'),fi=document.getElementById('s-files'),fr=document.getElementById('s-rec'),ch=document.getElementById('s-chosen');
+function picked(){var a=Array.prototype.slice.call(fi.files).concat(Array.prototype.slice.call(fr.files));return a}
+function showPicked(){var a=picked();ch.textContent=a.length?('Ready to add: '+(a.length===1?(a[0].name||'1 item'):a.length+' items')+'. Now tap Add to our yearbook.'):''}
+fi.addEventListener('change',showPicked);fr.addEventListener('change',showPicked);
+if(location.hash==='#record'){setTimeout(function(){var r=document.getElementById('record');document.getElementById('shareform').scrollIntoView({behavior:'smooth',block:'start'});r.classList.add('pulse')},300)}
 try{var nm=localStorage.getItem('usq_name');if(nm)document.getElementById('s-name').value=nm}catch(e){}
 f.addEventListener('submit',function(e){e.preventDefault();
   if(f.querySelector('[name=bot-field]').value)return;
   var name=document.getElementById('s-name').value.trim();
   if(name.length<2){st.textContent='Please add your name.';document.getElementById('s-name').focus();return}
-  if(!fi.files.length){st.textContent='Please choose at least one photo or video.';return}
+  if(!picked().length){st.textContent='Please choose at least one photo or video.';return}
   try{localStorage.setItem('usq_name',name)}catch(e){}
   go.disabled=true;
-  USQ.uploadMany(fi.files,{name:name,from:document.getElementById('s-from').value.trim(),caption:document.getElementById('s-cap').value.trim()},function(t){st.textContent=t}).then(function(r){
+  USQ.uploadMany(picked(),{name:name,from:document.getElementById('s-from').value.trim(),caption:document.getElementById('s-cap').value.trim()},function(t){st.textContent=t}).then(function(r){
     go.disabled=false;
-    if(r.items.length){all=r.items.slice().reverse().concat(all);shown+=r.items.length;wall.insertAdjacentHTML('afterbegin',r.items.slice().reverse().map(function(x){return USQ.tile(x)}).join(''));cnt.textContent=all.length+' photos and videos shared so far.';fi.value='';document.getElementById('s-cap').value='';wall.scrollIntoView({behavior:'smooth',block:'start'})}
+    if(r.items.length){all=r.items.slice().reverse().concat(all);shown+=r.items.length;wall.insertAdjacentHTML('afterbegin',r.items.slice().reverse().map(function(x){return USQ.tile(x)}).join(''));cnt.textContent=all.length+' photos and videos shared so far.';fi.value='';fr.value='';ch.textContent='';document.getElementById('s-cap').value='';wall.scrollIntoView({behavior:'smooth',block:'start'})}
     st.textContent=(r.items.length?'Thank you! '+r.items.length+(r.items.length===1?' item is':' items are')+' in our yearbook.':'')+(r.errors.length?(r.items.length?'\n':'')+r.errors.join('\n'):'');
   });
 });

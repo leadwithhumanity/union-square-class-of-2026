@@ -87,6 +87,19 @@
 .sharebox .addph{margin-top:0}
 .sharebox .btn{background:var(--gold);color:var(--ink);justify-content:center;width:100%}
 .sharebox .st{grid-column:1/-1;font-weight:700;min-height:1.4em;margin:4px 0 0;white-space:pre-line}
+.pick2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sharebox .pickbtn{display:flex;margin:0;gap:12px;align-items:center;padding:16px;border-radius:12px;background:var(--bg);color:var(--ink);cursor:pointer;border:3px solid transparent}
+.pickbtn.rec{background:var(--gold)}
+.pickbtn svg{flex:none}
+.pickbtn b{display:block;font-family:var(--display);font-size:1.05rem}
+#shareform{scroll-margin-top:80px}
+.pickbtn small{display:block;font-size:.85rem;line-height:1.35;opacity:.85;margin-top:2px}
+.pickbtn input{position:absolute;width:1px;height:1px;opacity:0}
+.pickbtn:focus-within{border-color:var(--maple)}
+.pickbtn.pulse{animation:pulse 1.2s ease 2}
+@keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(232,168,56,.45)}}
+.chosen{margin:0;font-weight:700;min-height:1.2em}
+@media (max-width:700px){.pick2{grid-template-columns:1fr}}
 .morebtn [hidden],.sharebox [hidden]{display:none!important}
 .entry+.nmedia,.nmedia.after{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin:-24px 0 30px}
 .nmedia.after .gm{padding:0;box-shadow:none;background:none;margin:0}.nmedia.after figcaption{display:none}.nmedia.after img,.nmedia.after video{aspect-ratio:1;object-fit:cover}
