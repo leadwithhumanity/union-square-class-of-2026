@@ -9,7 +9,7 @@ import { getStore } from "@netlify/blobs";
 
 export const CHUNK = 3 * 1024 * 1024;
 const TYPES = { "image/jpeg": "img", "image/png": "img", "image/webp": "img", "video/mp4": "vid", "video/quicktime": "vid", "video/webm": "vid" };
-const MAX = { img: 15 * 1024 * 1024, vid: 300 * 1024 * 1024 };
+const MAX = { img: 15 * 1024 * 1024, vid: 250 * 1024 * 1024 };
 const ID = /^[a-z0-9]{6,12}-[a-z0-9]{4,8}$/;
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
@@ -91,7 +91,7 @@ export async function handle(req, store, adminKey) {
     if (!kind) return json({ error: "Please choose a photo (JPG or PNG) or a video (MP4 or MOV)." }, 400);
     const size = Number(b.size);
     if (!(size > 0)) return json({ error: "That file looks empty." }, 400);
-    if (size > MAX[kind]) return json({ error: kind === "vid" ? "That video is too large. Please choose a clip of 2 minutes or less." : "That photo is too large." }, 400);
+    if (size > MAX[kind]) return json({ error: kind === "vid" ? "That video is too large. Please keep it to 20 seconds, one for each of our 20 years." : "That photo is too large." }, 400);
     const name = clean(b.name, 80);
     if (name.length < 2) return json({ error: "Please add your name." }, 400);
     const id = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);

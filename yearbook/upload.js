@@ -1,6 +1,6 @@
 /* Guest photo and video uploads for the Union Square yearbook. Photos are shrunk on the phone before sending; videos go up in small parts. */
 (function () {
-  var MAXSEC = 135;
+  var MAXSEC = 23;
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function vidType(f) {
     var t = (f.type || '').toLowerCase(), n = (f.name || '').toLowerCase();
@@ -67,7 +67,7 @@
     if (vid) {
       type = vidType(file);
       if (!type) return Promise.reject(new Error('Please choose an MP4 or MOV video.'));
-      blobP = videoInfo(file).then(function (x) { if (x.d && x.d > MAXSEC) throw new Error('That video is ' + Math.round(x.d) + ' seconds. Please choose a clip of 2 minutes or less.'); return { blob: file, thumb: x.thumb }; });
+      blobP = videoInfo(file).then(function (x) { if (x.d && x.d > MAXSEC) throw new Error('That video is ' + Math.round(x.d) + ' seconds. Please keep it to 20 seconds, one for each of our 20 years.'); return { blob: file, thumb: x.thumb }; });
     } else { type = 'image/jpeg'; blobP = shrink(file); }
     return blobP.then(function (pk) {
       var blob = pk.blob;
