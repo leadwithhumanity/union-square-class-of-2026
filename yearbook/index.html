@@ -23,6 +23,12 @@
 .cover .inner{padding:56px 20px 64px;display:flex;flex-direction:column;align-items:center}
 .portrait{margin:0 0 26px;background:#fff;padding:12px 12px 10px;width:min(300px,70vw);transform:rotate(-2deg);box-shadow:0 24px 50px -14px rgba(0,0,0,.6)}
 .portrait img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.thennow{display:flex;justify-content:center;align-items:flex-start;margin:0 0 26px}
+.thennow .portrait{margin:0;width:min(260px,42vw);padding:9px 9px 8px}
+.thennow .then{transform:rotate(-4deg);margin-right:-14px;margin-top:10px;z-index:1}
+.thennow .now{transform:rotate(3deg);z-index:2}
+.thennow figcaption{font-size:clamp(1rem,3.6vw,1.45rem)}
+.thennow .then img{filter:grayscale(1) contrast(1.05)}
 .portrait figcaption{font-family:var(--hand);font-size:clamp(1.25rem,4.6vw,1.6rem);white-space:nowrap;color:var(--ink);line-height:1.1;margin-top:8px}
 .cover .kicker{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:1.05rem;color:var(--bg);text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .cover .title,.cover .motto{text-shadow:0 2px 18px rgba(0,0,0,.45)}
@@ -61,7 +67,7 @@
 <section class="cover">
   <img class="bg" src="img/z224_arch.jpg" alt="" fetchpriority="high">
   <div class="inner">
-    <figure class="portrait"><img src="img/brian-erica-outside-union-square.jpg" alt="Brian and Erica smiling outside Union Square, the old high school, with drinks in hand."><figcaption>Brian and Erica, Class of 2026</figcaption></figure>
+    <div class="thennow"><figure class="portrait then"><img src="img/brian-erica-wedding-2010.jpg" alt="Brian and Erica walking back up the aisle at their wedding in 2010, hands raised."><figcaption>Then, 2010</figcaption></figure><figure class="portrait now"><img src="img/brian-erica-outside-union-square.jpg" alt="Brian and Erica smiling outside Union Square, the old high school, with drinks in hand."><figcaption>Now, Class of 2026</figcaption></figure></div>
     <div class="kicker">The Loft at Union&nbsp;Square<span class="kdot"> &middot; </span><br class="kbr">2006 to&nbsp;2026</div>
     <h1 class="title">You are <span class="yr">invited</span></h1>
     <p class="motto">Celebrating 20 Years of Sharing Our&nbsp;Home&nbsp;and&nbsp;Community</p>
