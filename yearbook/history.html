@@ -75,6 +75,7 @@ dialog.zoom img{max-width:96vw;max-height:96vh;border-radius:8px}
 .chapter h2{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800}
 .chapter .ch p{margin:0;font-family:var(--hand);font-size:1.6rem;color:var(--maple);line-height:1.1}
 .wall{columns:3 280px;column-gap:14px}
+@media (max-width:700px){#place .wall{columns:2;column-gap:8px}#place .wall figure{margin-bottom:8px}#place .wall figcaption{font-size:.8rem}}
 .wall figure{break-inside:avoid;margin:0 0 14px;position:relative;overflow:hidden;border-radius:4px;background:#e9dccb;cursor:zoom-in}
 .wall img{width:100%;height:auto;display:block;transition:transform .8s ease}
 .wall figure:hover img{transform:scale(1.03)}
