@@ -494,6 +494,6 @@ body.owner-mode .card .own{display:flex}
 })();
 </script>
 <script>(function(){var P='sale',f=false;try{var k='usq_seen_'+P;f=!localStorage.getItem(k);localStorage.setItem(k,'1')}catch(e){}try{fetch('/api/hit',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({page:P,first:f}),keepalive:true}).catch(function(){})}catch(e){}})();</script>
-
+<script>(function(){var m=window.matchMedia&&matchMedia('(hover:none) and (pointer:coarse)');if(!m||!m.matches)return;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[target=_blank]');if(!a||e.defaultPrevented)return;var h=a.getAttribute('href')||'';if(!/^https?:/i.test(h))return;e.preventDefault();location.href=h},false)})();</script>
 </body>
 </html>
