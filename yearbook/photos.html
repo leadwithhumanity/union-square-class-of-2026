@@ -55,6 +55,7 @@
 @keyframes pulse{50%{transform:scale(1.04);box-shadow:0 0 0 6px rgba(232,168,56,.45)}}
 .chosen{margin:0;font-weight:700;min-height:1.2em}
 @media (max-width:700px){.pick2{grid-template-columns:1fr}}
+@media (max-width:600px){.pg-photos .pagehead h1{font-size:2.3rem;line-height:1}.pg-photos .pagehead{padding-top:18px}.sharebox h2{font-size:1.3rem}}
 .morebtn [hidden],.sharebox [hidden]{display:none!important}
 .entry+.nmedia,.nmedia.after{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin:-24px 0 30px}
 .nmedia.after .gm{padding:0;box-shadow:none;background:none;margin:0}.nmedia.after figcaption{display:none}.nmedia.after img,.nmedia.after video{aspect-ratio:1;object-fit:cover}
@@ -72,10 +73,10 @@
 <form class="sharebox" id="shareform" novalidate>
   <h2>Leave us a video message or a photo</h2>
   <p hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-  <div><label for="s-name">Your name</label><input type="text" id="s-name" required autocomplete="name"></div>
-  <div><label for="s-from">Where you're from (optional)</label><input type="text" id="s-from" autocomplete="address-level2"></div>
-  <div class="full"><label for="s-cap">A few words about it (optional)</label><input type="text" id="s-cap" maxlength="300" placeholder="Saturday on the rooftop, summer 2014"></div>
+  <div class="full"><label for="s-name">Your name</label><input type="text" id="s-name" required autocomplete="name"></div>
   <div class="pick2 full"><label class="pickbtn" for="s-files"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="10" r="2" fill="currentColor"/><path d="M4 18l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Upload photos or a video</b><small>From your camera roll. Pick as many as you like.</small></span><input type="file" id="s-files" accept="image/*,video/*" multiple></label><label class="pickbtn rec" for="s-rec" id="record"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 10.5 22 7v10l-6-3.5z" fill="currentColor"/></svg><span><b>Record a video</b><small>Opens your camera. Up to 60 seconds.</small></span><input type="file" id="s-rec" accept="video/*" capture="user"></label></div><p class="chosen full" id="s-chosen" aria-live="polite"></p>
+  <div class="full"><label for="s-cap">A few words about it (optional)</label><input type="text" id="s-cap" maxlength="300" placeholder="Saturday on the rooftop, summer 2014"></div>
+  <div class="full"><label for="s-from">Where you're from (optional)</label><input type="text" id="s-from" autocomplete="address-level2"></div>
   <div class="full"><button class="btn" type="submit" id="s-go">Add to our yearbook</button></div>
   <p class="st" id="s-st" role="status" aria-live="polite"></p>
 </form></div></section>
