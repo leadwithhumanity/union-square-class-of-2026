@@ -23,7 +23,7 @@ button.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px 
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .scroll{overflow-x:auto;background:var(--card);border-radius:12px}
 table{border-collapse:collapse;width:100%;font-size:.95rem}
-th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;-webkit-user-select:text;user-select:text}
 th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
 td.num{font-variant-numeric:tabular-nums;text-align:right}
 #msg{font-weight:700;color:var(--accent);min-height:1.5em}
@@ -48,7 +48,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
       <div class="tile"><b id="h-s">0</b><span>People who opened the estate sale</span></div>
       <div class="tile"><b id="h-y">0</b><span>People who opened yearbook pages</span></div>
     </div>
-    <div class="acts"><button id="cp" type="button">Copy all cell numbers for a group text</button><button id="csv" class="ghost" type="button">Copy as spreadsheet rows</button></div>
+    <div class="acts"><button id="cp" type="button">Copy all cell numbers</button><button id="csv" class="ghost" type="button">Copy as spreadsheet rows</button></div><label for="nums" style="display:block;font-weight:700;margin:4px 0 6px">All cell numbers (tap the box, then Select All and Copy if the button does not work)</label><textarea id="nums" readonly rows="4" style="width:100%;font:inherit;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;margin-bottom:16px;-webkit-user-select:text;user-select:text"></textarea>
     <div class="scroll"><table><thead><tr><th>Name</th><th>Cell</th><th>Email</th><th>Days</th><th>Adults</th><th>Kids</th><th>Text OK</th><th>Newsletter</th><th>When</th></tr></thead><tbody id="rows"></tbody></table></div>
     <h2 style="margin:34px 0 6px">Shared photos and videos</h2>
     <p class="sub" id="mcount">Tap Hide to take something off the site. You can show it again later.</p>
@@ -70,7 +70,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
     fetch('/api/rsvp?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(d){
       if(!d.rsvps){msg.textContent='That key did not work. Check the ADMIN_PHRASE value in Netlify.';return}
       try{localStorage.setItem('rsvpkey',k.value.trim())}catch(e){}
-      data=d;msg.textContent='Updated '+new Date().toLocaleTimeString();
+      data=d;setTimeout(function(){document.getElementById('nums').value=allNums()},0);msg.textContent='Updated '+new Date().toLocaleTimeString();
       document.getElementById('out').hidden=false;
       document.getElementById('t-n').textContent=d.count;
       document.getElementById('t-f').textContent=d.friday.adults+' + '+d.friday.kids;
@@ -95,10 +95,15 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
     var url=b.dataset.mid?'/api/media?key='+key+'&id='+b.dataset.mid:'/api/guestbook?key='+key+'&id='+b.dataset.nid;
     fetch(url,{method:b.dataset.mid&&b.dataset.h==='1'?'PATCH':'DELETE'}).then(function(){media()});
   });
-  function copy(t,label){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){msg.textContent=label}).catch(function(){window.prompt('Copy this',t)})}
+  function allNums(){if(!data)return '';var seen={};return data.rsvps.filter(function(r){if(!r.cell||seen[r.cell])return false;seen[r.cell]=1;return true}).map(function(r){return fmt(r.cell)}).join(', ')}
+  function copy(t,label){
+    var ta=document.getElementById('nums'),done=function(){msg.textContent=label};
+    function fallback(){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.top='0';x.style.opacity='0';document.body.appendChild(x);x.focus();x.select();x.setSelectionRange(0,t.length);var ok=false;try{ok=document.execCommand('copy')}catch(e){}x.remove();if(ok)done();else{msg.textContent='Tap the box below, choose Select All, then Copy.';ta.focus();ta.select()}}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,fallback)}else fallback();
+  }
   document.getElementById('go').onclick=load;
   k.addEventListener('keydown',function(e){if(e.key==='Enter')load()});
-  document.getElementById('cp').onclick=function(){if(!data)return;copy(data.rsvps.filter(function(r){return r.text_ok&&r.cell}).map(function(r){return fmt(r.cell)}).join(', '),'Cell numbers copied.')};
+  document.getElementById('cp').onclick=function(){if(!data)return;copy(allNums(),'Cell numbers copied. Paste them into a new text.')};
   document.getElementById('csv').onclick=function(){if(!data)return;var rows=[['Name','Cell','Email','Days','Adults','Kids','Text OK','Newsletter','When']].concat(data.rsvps.map(function(r){return[r.name,fmt(r.cell),r.email,days(r),r.adults,r.kids,r.text_ok?'Yes':'',r.keep_in_touch?'Yes':'',r.at]}));copy(rows.map(function(x){return x.join('\t')}).join('\n'),'Rows copied. Paste into a Google Sheet.')};
   if(k.value)load();
 })();
