@@ -26,6 +26,7 @@ table{border-collapse:collapse;width:100%;font-size:.95rem}
 th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;-webkit-user-select:text;user-select:text}
 th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
 td.num{font-variant-numeric:tabular-nums;text-align:right}
+td .st{display:inline-block;font-size:.8rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--line)}td .st.sold{background:#C62828;color:#fff}td .st.pending{background:var(--gold)}td .sb{padding:6px 10px;font-size:.85rem;margin:0 4px 4px 0}td.wrap{white-space:normal;min-width:220px}
 #msg{font-weight:700;color:var(--accent);min-height:1.5em}
 </style>
 </head>
@@ -50,6 +51,11 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
     </div>
     <div class="acts"><button id="cp" type="button">Copy all cell numbers</button><button id="csv" class="ghost" type="button">Copy as spreadsheet rows</button></div><label for="nums" style="display:block;font-weight:700;margin:4px 0 6px">All cell numbers (tap the box, then Select All and Copy if the button does not work)</label><textarea id="nums" readonly rows="4" style="width:100%;font:inherit;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;margin-bottom:16px;-webkit-user-select:text;user-select:text"></textarea>
     <div class="scroll"><table><thead><tr><th>Name</th><th>Cell</th><th>Email</th><th>Days</th><th>Adults</th><th>Kids</th><th>Text OK</th><th>Newsletter</th><th>When</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <h2 style="margin:34px 0 6px" id="sale">Estate sale: mark sold</h2>
+    <p class="sub">Tap a button and the estate sale page updates within a few seconds. "Release claim" frees an item someone claimed online.</p>
+    <div class="keybox" style="margin-bottom:10px"><label for="sq" style="position:absolute;left:-9999px">Find an item</label><input id="sq" type="search" placeholder="Find an item (for example: lamp, rug, Ellis)"><select id="sf" style="font:inherit;padding:10px 12px;border:2px solid var(--ink);border-radius:10px"><option value="all">All items</option><option value="available">For sale</option><option value="pending">Spoken for</option><option value="sold">Sold</option></select></div>
+    <p id="smsg" role="status" style="font-weight:700;color:var(--accent);min-height:1.5em;margin:0 0 8px"></p>
+    <div class="scroll"><table><thead><tr><th>Item</th><th>Price</th><th>Status</th><th>Claimed by</th><th>Change</th></tr></thead><tbody id="srows"></tbody></table></div>
     <h2 style="margin:34px 0 6px">Shared photos and videos</h2>
     <p class="sub" id="mcount">Tap Hide to take something off the site. You can show it again later.</p>
     <div id="media" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
@@ -77,7 +83,7 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
       document.getElementById('t-s').textContent=d.saturday.adults+' + '+d.saturday.kids;
       document.getElementById('t-c').textContent=d.rsvps.filter(function(r){return r.events.length===1&&r.events[0]==='Cannot come'}).length;
       document.getElementById('rows').innerHTML=d.rsvps.map(function(r){return '<tr><td>'+esc(r.name)+'</td><td>'+esc(fmt(r.cell))+'</td><td>'+esc(r.email)+'</td><td>'+esc(days(r))+'</td><td class="num">'+r.adults+'</td><td class="num">'+r.kids+'</td><td>'+(r.text_ok?'Yes':'')+'</td><td>'+(r.keep_in_touch?'Yes':'')+'</td><td>'+esc(new Date(r.at).toLocaleString())+'</td></tr>'}).join('');
-      media();fetch('/api/hit?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(h){if(!h.invite)return;document.getElementById('h-i').textContent=h.invite.people;document.getElementById('h-io').textContent=h.invite.opens;document.getElementById('h-s').textContent=h.sale.people;document.getElementById('h-y').textContent=h.yearbook.people}).catch(function(){});
+      media();sale();fetch('/api/hit?key='+encodeURIComponent(k.value.trim())).then(function(r){return r.json()}).then(function(h){if(!h.invite)return;document.getElementById('h-i').textContent=h.invite.people;document.getElementById('h-io').textContent=h.invite.opens;document.getElementById('h-s').textContent=h.sale.people;document.getElementById('h-y').textContent=h.yearbook.people}).catch(function(){});
     }).catch(function(){msg.textContent='Could not reach the site. Try again in a minute.'});
   }
   function media(){
@@ -96,6 +102,49 @@ td.num{font-variant-numeric:tabular-nums;text-align:right}
     fetch(url,{method:b.dataset.mid&&b.dataset.h==='1'?'PATCH':'DELETE'}).then(function(){media()});
   });
   function allNums(){if(!data)return '';var seen={};return data.rsvps.filter(function(r){if(!r.cell||seen[r.cell])return false;seen[r.cell]=1;return true}).map(function(r){return fmt(r.cell)}).join(', ')}
+
+  var SALE={items:[],status:{},claims:{}};
+  function sale(){
+    var key=encodeURIComponent(k.value.trim());
+    Promise.all([
+      fetch('/estate-sale.html',{cache:'no-store'}).then(function(r){return r.text()}),
+      fetch('/api/status',{cache:'no-store'}).then(function(r){return r.json()}).catch(function(){return {status:{}}}),
+      fetch('/api/claim?key='+key,{cache:'no-store'}).then(function(r){return r.json()}).catch(function(){return {claims:[]}})
+    ]).then(function(a){
+      var m=a[0].match(/<script id="state" type="application\/json">([\s\S]*?)<\/script>/);
+      var st=m?JSON.parse(m[1].replace(/<\\\//g,'</')):{items:[]};
+      SALE.items=st.items.filter(function(i){return !i.hidden});
+      SALE.status=a[1].status||{};
+      SALE.claims={};(a[2].claims||[]).forEach(function(c){SALE.claims[c.id]=c});
+      drawSale();
+    }).catch(function(){document.getElementById('smsg').textContent='Could not load the estate sale items. Try again in a minute.'});
+  }
+  function effective(it){var o=SALE.status[it.id];if(o)return o;if(it.status!=='available')return it.status;return SALE.claims[it.id]?'pending':'available'}
+  function drawSale(){
+    var q=(document.getElementById('sq').value||'').toLowerCase(),f=document.getElementById('sf').value;
+    var lab={available:'For sale',pending:'Spoken for',sold:'Sold'};
+    document.getElementById('srows').innerHTML=SALE.items.filter(function(it){var e=effective(it);return (f==='all'||e===f)&&(!q||it.name.toLowerCase().indexOf(q)>-1)}).map(function(it){
+      var e=effective(it),c=SALE.claims[it.id];
+      var who=c?esc(c.name)+'<br>'+esc(fmt(String(c.phone||'').replace(/\D/g,'').slice(-10)))+(c.at?'<br><small>'+esc(new Date(c.at).toLocaleString())+'</small>':''):'';
+      var b='';
+      if(e!=='sold')b+='<button type="button" class="sb" data-sid="'+it.id+'" data-s="sold">Sold</button>';
+      if(e!=='available')b+='<button type="button" class="sb ghost" data-sid="'+it.id+'" data-s="available">For sale</button>';
+      if(e==='available')b+='<button type="button" class="sb ghost" data-sid="'+it.id+'" data-s="pending">Spoken for</button>';
+      if(c)b+='<button type="button" class="sb ghost" data-cid="'+it.id+'">Release claim</button>';
+      return '<tr><td class="wrap">'+esc(it.name)+'</td><td class="num">$'+it.price+'</td><td><span class="st '+e+'">'+lab[e]+'</span></td><td>'+who+'</td><td class="wrap">'+b+'</td></tr>'}).join('')||'<tr><td colspan="5">No items match.</td></tr>';
+  }
+  document.getElementById('sq').addEventListener('input',drawSale);
+  document.getElementById('sf').addEventListener('change',drawSale);
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-sid],button[data-cid]');if(!b)return;
+    var key=encodeURIComponent(k.value.trim()),sm=document.getElementById('smsg');b.disabled=true;
+    var it=SALE.items.filter(function(x){return x.id===(b.dataset.sid||b.dataset.cid)})[0]||{name:''};
+    var p;
+    if(b.dataset.cid){p=fetch('/api/claim?key='+key+'&id='+b.dataset.cid,{method:'DELETE'}).then(function(r){if(!r.ok)throw 0;delete SALE.claims[b.dataset.cid];if(SALE.status[b.dataset.cid]==='pending')return fetch('/api/status?key='+key,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:b.dataset.cid,status:'clear'})}).then(function(){delete SALE.status[b.dataset.cid]});}).then(function(){sm.textContent='Released the claim on '+it.name+'.'});}
+    else{var s=b.dataset.s,base=it.status;var send=(s===base&&!SALE.claims[it.id])?'clear':s;
+      p=fetch('/api/status?key='+key,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({id:b.dataset.sid,status:send})}).then(function(r){if(!r.ok)throw 0;if(send==='clear')delete SALE.status[b.dataset.sid];else SALE.status[b.dataset.sid]=s;sm.textContent=it.name+' is now '+({sold:'sold',available:'for sale',pending:'spoken for'})[s]+' on the estate sale page.'});}
+    p.catch(function(){sm.textContent='That did not save. Check your key and try again.'}).then(function(){b.disabled=false;drawSale()});
+  });
   function copy(t,label){
     var ta=document.getElementById('nums'),done=function(){msg.textContent=label};
     function fallback(){var x=document.createElement('textarea');x.value=t;x.setAttribute('readonly','');x.style.position='fixed';x.style.top='0';x.style.opacity='0';document.body.appendChild(x);x.focus();x.select();x.setSelectionRange(0,t.length);var ok=false;try{ok=document.execCommand('copy')}catch(e){}x.remove();if(ok)done();else{msg.textContent='Tap the box below, choose Select All, then Copy.';ta.focus();ta.select()}}
